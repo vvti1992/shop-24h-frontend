@@ -1,8 +1,22 @@
-li{
+ul.icon li, ul.footer-content li, ul.footer-icon li{
   list-style: none;
 }
-ul{
+ul.footer-content li{
+  text-align: left;
+}
+ul.icon{
   display: flex;
   justify-content:flex-end;
   justify-items: center;
+}
+h5.footer-title{
+  padding-left: 20px;
+}
+ul.footer-icon {
+  width: 200px;
+  display: flex;
+  justify-content:space-around;
+}
+div.footer-logo {
+  padding-left: 20px;
 }
