@@ -89,5 +89,5 @@ const LIST_PRODUCE_JSON = `[
         "discription": "Chụp selfie bùng nổ trong đêm, thiết kế mới hiện đại đón đầu xu hướng, cùng với đó là tốc độ kết nối mạng 5G hàng đầu, tất cả những tính năng ấn tượng này đều có trong Vivo V21 5G",
         "createTime": "05/2021"
     }
-]`
+]`;
 export default LIST_PRODUCE_JSON;

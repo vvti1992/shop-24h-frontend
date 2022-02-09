@@ -20,3 +20,28 @@ ul.footer-icon {
 div.footer-logo {
   padding-left: 20px;
 }
+p.card-text span {
+  text-decoration: line-through;
+  font-weight: normal;
+  line-height: 1;
+}
+p.card-text {
+  font-weight: bold;
+  margin-bottom: 0px;
+}
+h4.card-title {
+  font-size: medium;
+}
+.content{
+  margin-top: 83px;
+}
+.carousel{
+  margin: auto;
+}
+.carousel img{
+  border-radius: 15px 5px;
+}
+img.logo {
+  border-radius: 20px;
+  opacity: .8;
+}
