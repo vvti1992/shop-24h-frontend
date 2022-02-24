@@ -1,18 +1,15 @@
 
+import { Route, Routes } from 'react-router-dom';
 import './App.css';
-import Content from './components/content/content';
-import Footer from './components/footer/footer';
-import Header from './components/header/header';
-import LIST_PRODUCE_JSON from './components/list-products';
-
+import HomePage from './components/homePage';
+import Login from './components/login/Login';
 function App() {
-  const LIST_PRODUCE = JSON.parse(LIST_PRODUCE_JSON);
-  console.log(LIST_PRODUCE);
   return (
     <div >
-      <Header/>
-      <Content/>
-      <Footer/>
+      <Routes>
+        <Route path="/" element={<HomePage/>}></Route>
+        <Route path="/login" element={<Login/>}></Route>
+      </Routes>
     </div>
   );
 }

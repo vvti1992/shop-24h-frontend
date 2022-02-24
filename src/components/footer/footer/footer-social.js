@@ -9,16 +9,16 @@ function Social() {
             <div>
                 <ul className='footer-icon'>
                     <li>
-                        <i class="fa-brands fa-facebook-square"></i>
+                        <i className="fa-brands fa-facebook-square"></i>
                     </li>
                     <li>
-                        <i class="fa-brands fa-instagram-square"></i>
+                        <i className="fa-brands fa-instagram-square"></i>
                     </li>
                     <li>
-                        <i class="fa-brands fa-youtube"></i>
+                        <i className="fa-brands fa-youtube"></i>
                     </li>
                     <li>
-                        <i class="fa-brands fa-twitter"></i>
+                        <i className="fa-brands fa-twitter"></i>
                     </li>
                 </ul>
             </div>

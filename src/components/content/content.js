@@ -1,18 +1,23 @@
-import { Container, Row } from "reactstrap";
+import { useEffect, useState } from "react";
+import { Container, Row, Col } from "reactstrap";
+import FilterComponent from "./content/FilterComponent";
 import Introduce from "./content/introduce";
-import LastestProduct from "./content/lastest-product";
-import ViewAll from "./content/view-all";
+import ProductListComponent from "./content/ProductListComponent";
 function Content() {
+    const [listProduct, setListProduct] = useState([]);
+    // console.log(listProduct);
     return (
         <Container className="bg-light content">
             <Row>
-                <Introduce/>
+                <Introduce />
             </Row>
             <Row>
-                <LastestProduct />
-            </Row>
-            <Row>
-                <ViewAll />
+                <Col xs='3'>
+                    <FilterComponent setListProduct = {setListProduct}/>
+                </Col>
+                <Col xs='9'>
+                    <ProductListComponent listProduct={listProduct}/>
+                </Col>
             </Row>
         </Container>
     )

@@ -1,6 +1,7 @@
 ul.icon li, ul.footer-content li, ul.footer-icon li{
   list-style: none;
 }
+
 ul.footer-content li{
   text-align: left;
 }
@@ -45,3 +46,100 @@ img.logo {
   border-radius: 20px;
   opacity: .8;
 }
+.form-login{
+  width: 300px;
+  position: relative;
+  left: 50%;
+  top: 20px;
+  transform: translate(-50%,0%);
+  background-color: #f4f4f4;
+  padding: 20px;
+  border-radius: 10px;
+}
+.sign-google {
+  border-radius: 20px;
+  background-color: #d43e3e;
+  color: whitesmoke;
+  width: 100%;
+  padding: 5px 0px;
+  border-width: 0px;
+}
+.bg-color {
+  background-color: #b4c3c4;
+}
+.break-line{
+  position: relative;
+  left: 50%;
+  transform: translate(-50%,-5px);
+  width: 30px;
+  height: 30px;
+  top: -20px;
+  background-color: white;
+  border-radius: 50%;
+  border: 1px solid darkgray;
+}
+hr {
+  margin-top: 30px;
+}
+label {
+  margin-left: 5px;
+  font-weight: bold;
+}
+.input-login {
+  width: 100%;
+  border-radius: 20px;
+  border-width: 1px;
+  margin-bottom: 20px;
+  color: darkgrey;
+  padding: 5px;
+  font-weight: 600;
+}
+.signin{
+  background-color: #16ba5b !important;
+}
+.message {
+  width: 300px;
+  position: relative;
+  left: 50%;
+  top: 20px;
+  transform: translate(-50%,0%);
+  padding: 20px;
+}
+.avatar{
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  margin-left: 5px;
+}
+ul.user-info {
+  text-align: right;
+  display: flex;
+  list-style: none;
+  justify-content:flex-end;
+  margin-bottom: 0px;
+  text-decoration: none;
+}
+ul.user-info a {
+  text-decoration: none;
+}
+ul.user-info:hover {
+  cursor: pointer;
+}
+
+.card {
+  width: 295px;
+  float: left;
+  margin: 5px;
+  box-sizing: border-box;
+}
+.pagination{
+  justify-content: flex-end;
+}
+.card-body h6 {
+  text-decoration: line-through;
+}
+.css-6hp17o-MuiList-root-MuiMenu-list {
+  padding-top: 0px !important;
+  padding-bottom: 0px !important;
+}
+
