@@ -2,8 +2,25 @@ import { useState, useEffect } from "react";
 import { Container, Card, CardImg, CardBody, CardTitle, CardSubtitle, CardText, Row, Col } from "reactstrap";
 import NavigationComponent from "./NavigationComponent";
 
-function ProductListComponent({listProduct}) {
-    // console.log(listProduct);
+function ProductListComponent() {
+    const [listProduct, setListProduct] = useState([]);
+    const fetchApi = async (paramUrl, paramOption = {}) => {
+        const response = await fetch(paramUrl, paramOption);
+        const responseData = await response.json();
+        return responseData;
+    }
+    useEffect(() => {
+        let mounted = true;
+        fetchApi('http://localhost:8000/products')
+            .then((data) => {
+                if(mounted) {
+                    setListProduct(data.products);
+                    console.log(data.products);
+                  }
+            })
+            .catch(console.error());
+            return () => mounted = false;
+    }, [])
     const LIMIT_PRODUCT_PER_PAGE = 9;
     const NO_PAGE = Math.ceil(listProduct.length / LIMIT_PRODUCT_PER_PAGE);
     const [seletePage, setSelectPage] = useState(1);
@@ -21,7 +38,7 @@ function ProductListComponent({listProduct}) {
                     <Card key={index}>
                         <CardImg
                             alt="Image.jpg"
-                            src={element.URLImage}
+                            src={element.imageUrl}
                             top
                             width="50%"
                         />
@@ -33,10 +50,10 @@ function ProductListComponent({listProduct}) {
                                 className="mb-2 text-muted"
                                 tag="h6"
                             >
-                                {element.price} VNĐ
+                                {element.buyPrice.toLocaleString()} VNĐ
                             </CardSubtitle>
                             <CardText>
-                                {element.discountPrice} VNĐ
+                                {element.promotionPrice.toLocaleString()} VNĐ
                             </CardText>
                         </CardBody>
                     </Card>
@@ -47,5 +64,6 @@ function ProductListComponent({listProduct}) {
             <NavigationComponent count={NO_PAGE} page={seletePage} setPage = {setSelectPage}/>
         </Container>
     )
+
 }
 export default ProductListComponent;

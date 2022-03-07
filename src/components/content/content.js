@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Container, Row, Col } from "reactstrap";
 import FilterComponent from "./content/FilterComponent";
 import Introduce from "./content/introduce";
@@ -13,10 +13,10 @@ function Content() {
             </Row>
             <Row>
                 <Col xs='3'>
-                    <FilterComponent setListProduct = {setListProduct}/>
+                    <FilterComponent/>
                 </Col>
                 <Col xs='9'>
-                    <ProductListComponent listProduct={listProduct}/>
+                    <ProductListComponent/>
                 </Col>
             </Row>
         </Container>
