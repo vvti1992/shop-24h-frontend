@@ -6,9 +6,14 @@ body {
 ul.icon li, ul.footer-content li, ul.footer-icon li{
   list-style: none;
 }
+.breadcrumb {
+  margin-top: 75px;
+  margin-bottom: 10px;
 
+}
 ul.footer-content li{
   text-align: left;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
 ul.icon{
   display: flex;
@@ -25,7 +30,7 @@ ul.footer-icon {
   justify-content:space-around;
 }
 div.footer-logo {
-  padding-left: 20px;
+  padding-left: 40px;
 }
 p.card-text span {
   text-decoration: line-through;
@@ -38,9 +43,6 @@ p.card-text {
 }
 h4.card-title {
   font-size: medium;
-}
-.content{
-  margin-top: 83px;
 }
 .carousel{
   margin: auto;
@@ -155,6 +157,14 @@ ul.user-info:hover {
   box-sizing: border-box;
   cursor: pointer;
 }
+.box-product-detail {
+  width: 20%;
+  float: left;
+  text-align: center;
+  padding: 10px 5px;
+  box-sizing: border-box;
+  cursor: pointer;
+}
 .card-img, .card-img-top {
   padding: 10px 0px;
 }
@@ -194,4 +204,47 @@ h6.card-subtitle {
 p.card-text{
   color: #D70018;
   font-size: 15px;
+
+}
+
+.detail-description{
+  padding: 30px 0;
+  font-family: Sans-serif !important;
+  color: #444444;
+}
+.detail-name{
+  font-weight: bolder;
+}
+.detail-brand{
+  text-transform: capitalize;
+}
+.detail-price{
+  font-size: 14px;
+  text-decoration: line-through;
+}
+.detail-type{
+  text-transform: capitalize;
+}
+.btn-detail{
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: #707070;
+  color: #f4f4f4;
+}
+.btn-add-to-card{
+  background-color: black;
+  color: white;
+  font-size: 16px;
+}
+.detail-promotion-price{
+  font-size: 16px;
+  font-weight: 600;
+  color: red;
+}
+.hinhnho img
+{
+    width: 20%;
+    height: auto;
+    margin: 0 auto;
 }

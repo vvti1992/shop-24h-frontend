@@ -29,6 +29,7 @@ function Content() {
                 // console.log(data.products);
             })
             .catch(console.error());
+            window.scrollTo(0, 0);
     }, []);
     // console.log(filterReceive);
     useEffect(() => {
@@ -52,7 +53,7 @@ function Content() {
     // console.log(responseObj);
     // console.log(filter);
     return (
-        <Container className="bg-light content">
+        <Container className="bg-light">
             <Row>
                 <Introduce />
             </Row>
