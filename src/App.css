@@ -1,3 +1,8 @@
+body {
+  font-family: Sans-serif !important;
+  padding-right: 0 !important;
+  overflow: auto !important;
+}
 ul.icon li, ul.footer-content li, ul.footer-icon li{
   list-style: none;
 }
@@ -9,6 +14,7 @@ ul.icon{
   display: flex;
   justify-content:flex-end;
   justify-items: center;
+  color: aliceblue;
 }
 h5.footer-title{
   padding-left: 20px;
@@ -43,8 +49,10 @@ h4.card-title {
   border-radius: 15px 5px;
 }
 img.logo {
-  border-radius: 20px;
+  border-radius: 10px;
   opacity: .8;
+  height: 50px;
+  padding-top: 15px;
 }
 .form-login{
   width: 300px;
@@ -110,6 +118,7 @@ label {
   height: 30px;
   border-radius: 50%;
   margin-left: 5px;
+  
 }
 ul.user-info {
   text-align: right;
@@ -118,19 +127,41 @@ ul.user-info {
   justify-content:flex-end;
   margin-bottom: 0px;
   text-decoration: none;
+  color: aliceblue;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
 ul.user-info a {
   text-decoration: none;
+  
 }
 ul.user-info:hover {
   cursor: pointer;
 }
+.header{
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 10%), 0 2px 4px -1px rgb(0 0 0 / 6%);
+  z-index: 1000!important;
+  background-color: rgb(215, 0, 24) !important;
+}
+.row-header {
+  background-color: rgb(215, 0, 24);
+  height: 70px;
 
-.card {
-  width: 295px;
+}
+.box-product {
+  width: 25%;
   float: left;
-  margin: 5px;
+  text-align: center;
+  padding: 10px 5px;
   box-sizing: border-box;
+  cursor: pointer;
+}
+.card-img, .card-img-top {
+  padding: 10px 0px;
+}
+img.card-img-top:hover {
+  transform: translate(0,-10px);
+  transition-timing-function: linear;
+  transition: .5s
 }
 .pagination{
   justify-content: flex-end;
@@ -142,4 +173,25 @@ ul.user-info:hover {
   padding-top: 0px !important;
   padding-bottom: 0px !important;
 }
-
+.col-3 {
+  width: 20% !important;
+}
+.col-9 {
+  width: 80% !important;
+}
+h5.card-title {
+  font-size: 15px;
+  font-weight: 700;
+}
+h5.card-title:hover {
+  color: #288ad6;
+}
+h6.card-subtitle {
+  font-size: 13px;
+  color: #707070;
+  
+}
+p.card-text{
+  color: #D70018;
+  font-size: 15px;
+}
