@@ -6,7 +6,7 @@ import {Container, Row } from "reactstrap";
 
 function Footer() {
     return(
-        <Container className="bg-light pt-5">
+        <Container className="bg-light pt-3">
         <Row>
                 <Product/>
                 <Service/>
