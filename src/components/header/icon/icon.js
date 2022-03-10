@@ -4,7 +4,7 @@ import { Col } from 'reactstrap';
 function IconNavBar() {
     return (
         <Col sm='6' className='text-right pt-4 text-primary'>
-            <ul>
+            <ul className='icon'>
                 <li>
                     <i className="fa-solid fa-bell p-2"></i>
                 </li>
