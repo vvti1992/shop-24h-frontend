@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { Row, Col, Input, Label } from "reactstrap";
-import FilterProduct from "../../list-products";
 
-function FilterComponent({setListProduct}) {
+
+function FilterComponent() {
     const [result, setResult] = useState([])
     const [filter, setFilter] = useState({
         minPrice: null,
@@ -24,10 +24,10 @@ function FilterComponent({setListProduct}) {
             ...filter,maxPrice:event.target.value
         })
     }
-    useEffect(()=>{
-        setListProduct(result);
-        // console.log(result);
-    }, [result]);
+    // useEffect(()=>{
+    //     setListProduct(result);
+    //     // console.log(result);
+    // }, [result]);
     return (
         <div className="form-filter py-4">
             <div className="py-4">
@@ -63,7 +63,6 @@ function FilterComponent({setListProduct}) {
                 <Label><Input type="checkbox" name="checkbox" defaultChecked={filter.ios} onChange={()=>setFilter({...filter,ios: !filter.ios})}/> IOS</Label><br/>
                 <Label><Input type="checkbox" name="checkbox" defaultChecked={filter.android} onChange={()=>setFilter({...filter,android: !filter.android})}/> Android</Label><br/>
             </div>
-           <FilterProduct data = {filter} setListProduct={setResult}/>
         </div>
     )
 }
