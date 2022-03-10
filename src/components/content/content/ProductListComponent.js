@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { Container, Card, CardImg, CardBody, CardTitle, CardSubtitle, CardText, Row, Col } from "reactstrap";
 import NavigationComponent from "./NavigationComponent";
 
@@ -9,13 +10,21 @@ function ProductListComponent({ displayProduct }) {
     const NO_PAGE = Math.ceil(displayProduct.length / LIMIT_PRODUCT_PER_PAGE);
     const [seletePage, setSelectPage] = useState(1);
     const [posts, setPosts] = useState([]);
+    const fetchApi = async (paramUrl, paramOption = {}) => {
+        const response = await fetch(paramUrl, paramOption);
+        const responseData = await response.json();
+        return responseData;
+    }
     useEffect(() => {
         if (displayProduct.length > 12)
             setPosts(displayProduct.slice(seletePage * LIMIT_PRODUCT_PER_PAGE - LIMIT_PRODUCT_PER_PAGE, seletePage * LIMIT_PRODUCT_PER_PAGE));
         else
             setPosts(displayProduct);
     }, [seletePage, displayProduct]);
-    // console.log(posts);
+    const navigate = useNavigate();
+    const HandleDetailClick = (data) => {
+        navigate("/products/" + data._id);
+    }
     return (
         <Container>
             <Row>
@@ -23,7 +32,7 @@ function ProductListComponent({ displayProduct }) {
                     <h4 className="text-center py-4">PRODUCTS LIST</h4> <hr />
                     {
                         posts.map((element, index) => (
-                            <div key={index} className="box-product">
+                            <div key={index} className="box-product" onClick={() =>HandleDetailClick(element)}>
                                 <Card>
                                     <CardImg
                                         alt="Image.jpg"

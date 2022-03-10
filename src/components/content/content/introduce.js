@@ -1,20 +1,9 @@
-import { Col, Breadcrumb, BreadcrumbItem } from "reactstrap";
+import { Col } from "reactstrap";
 import Carousel from 'react-bootstrap/Carousel';
 function Introduce() {
     return (
         <Col sm='12'>
-            <Breadcrumb>
-                <BreadcrumbItem>
-                    <a >
-                        Home
-                    </a>
-                </BreadcrumbItem>
-                <BreadcrumbItem>
-                    <a href="/">
-                    Product
-                    </a>
-                </BreadcrumbItem>
-            </Breadcrumb>
+            
             <Carousel className="carousel">
                 <Carousel.Item>
                     <img className="d-block img-fluid" src='	https://cdn.tgdd.vn/2022/01/banner/830-300-830x300-21.png' alt="First slide" width="100%" />
