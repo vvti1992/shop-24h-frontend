@@ -1,17 +1,21 @@
+import '@fortawesome/fontawesome-free/css/all.min.css';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
-import '@fortawesome/fontawesome-free/css/all.min.css';
+import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
+import App from './App';
+import './index.css';
+import { store } from './Redux/Store';
+import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
-  <React.StrictMode>
-    <BrowserRouter>
-    <App />
-    </BrowserRouter>
-  </React.StrictMode>,
+  <Provider store= {store} >
+    <React.StrictMode>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </React.StrictMode>
+  </Provider>,
   document.getElementById('root')
 );
 

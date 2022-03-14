@@ -1,12 +1,16 @@
 import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import { Col, Container, Row, Card, CardImg, CardBody, CardTitle, CardSubtitle, CardText } from "reactstrap";
 import image1 from '../../../assets/images/galaxy s8/Blue_1.jpg';
 import image2 from '../../../assets/images/galaxy s8/Blue_2.jpg';
 import image3 from '../../../assets/images/galaxy s8/Blue_3.jpg';
 import image4 from '../../../assets/images/galaxy s8/Blue_4.jpg';
 import image5 from '../../../assets/images/galaxy s8/Blue_5.jpg';
+import { useNavigate } from "react-router-dom";
+import { updateNumber, addProduct } from "../../../Redux/userslice";
 
 function DetailProduct({ id }) {
+    const dispatch = useDispatch();
     const [product, setProduct] = useState({
         _id: null,
         name: null,
@@ -19,6 +23,8 @@ function DetailProduct({ id }) {
         timeCreated: null,
         timeUpdate: null
     });
+
+    const [number, setNumber] = useState(1);
     const [relativeProduct, setRelativeProduct] = useState([]);
     const [bigImage, setBigImage] = useState("");
     const fetchApi = async (paramUrl, paramOption = {}) => {
@@ -31,7 +37,6 @@ function DetailProduct({ id }) {
             .then((data) => {
                 setProduct(data.product);
                 setBigImage(data.product.imageUrl);
-                // console.log(data.product);
             })
             .catch(console.error());
     }, [id]);
@@ -43,8 +48,9 @@ function DetailProduct({ id }) {
             .catch(console.error());
         window.scrollTo(0, 0);
     }, []);
-    console.log(bigImage);
-    const [number, setNumber] = useState(1);
+    // console.log(bigImage);
+
+    const [orderArr, setOrderArr] = useState([]);
     const decreaseBtn = () => {
         if (number > 1) {
             setNumber(number - 1);
@@ -70,6 +76,24 @@ function DetailProduct({ id }) {
     const onImage5Click = () => {
         setBigImage(image5);
     }
+    var productObject = {
+        number: 0,
+        product: null
+    };
+    const buyProduct = () =>{
+        productObject = {
+            number: number,
+            product: product
+        }
+        dispatch(updateNumber(productObject));
+        dispatch(addProduct(productObject));
+    }
+  
+    const navigate = useNavigate();
+    const HandleDetailClick = (data) => {
+        navigate("/products/" + data._id);
+        setNumber(1);
+    }
     return (
         <Container className="bg-light">
             <Row>
@@ -92,11 +116,11 @@ function DetailProduct({ id }) {
                     <h5 className="detail-price">{product.buyPrice ? product.buyPrice.toLocaleString() : ""} VNĐ</h5>
                     <h5 className="detail-promotion-price">{product.promotionPrice ? product.promotionPrice.toLocaleString() : ""} VNĐ</h5>
                     <div>
-                        <button className="btn-detail" onClick={decreaseBtn}>-</button> {number}
+                        <button className="btn-detail" onClick={decreaseBtn}>-</button> <span className="px-2">{number}</span>
                         <button className="btn-detail" onClick={increaseBtn}>+</button>
                     </div>
                     <div className="pt-3">
-                        <button className="btn-add-to-card">ADD TO CART</button>
+                        <button className="btn-add-to-card" onClick={buyProduct}>ADD TO CART</button>
                     </div>
                 </Col>
                 <p className="detail-description">{product.description}</p> <hr />
@@ -106,7 +130,7 @@ function DetailProduct({ id }) {
                     <h5 className="text-center text-bold">REFERENCE PRODUCTS</h5>
                     {
                         relativeProduct.map((element, index) => (
-                            <div key={index} className="box-product-detail">
+                            <div key={index} className="box-product-detail" onClick={() =>HandleDetailClick(element)}>
                                 <Card>
                                     <CardImg
                                         alt="Image.jpg"

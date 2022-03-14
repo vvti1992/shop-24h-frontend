@@ -1,12 +1,12 @@
 import 'bootstrap/dist/css/bootstrap.min.css'
-import { useState } from 'react';
-import { Col } from 'reactstrap';
-import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from 'react';
+import { Row, Col } from 'reactstrap';
+
 import { Menu, MenuItem } from '@mui/material';
 import { auth } from '../../../firebase';
 import Login from '../../login/Login';
+
 function IconNavBar() {
-    const navigate = useNavigate();
     const [anchorEl, setAnchorEl] = useState(null);
     const [user, setUser] = useState(null);
     const [modalLogin, setModalLogin] = useState(false)
@@ -30,34 +30,32 @@ function IconNavBar() {
         setModalLogin(true);
     };
     return (
-        <>
-            <Col sm='6' className='text-right pt-2 text-primary'>
-                <div>
-
-                    {user ?
-                        <ul  className='user-info'>
-                            <li onClick={showUserInfo}>{localStorage.getItem("username")}</li>
-                            <li onClick={showUserInfo}><img className='avatar' src={localStorage.getItem("userimage")}></img></li>
+        <div>
+            {user ?
+                <Row  >
+                    <Col xs='10'>
+                        <ul className='user-info'>
+                            <li onClick={showUserInfo}><a >Tài khoản</a></li>
+                            <li onClick={showUserInfo}>{user.displayName}</li>
                         </ul>
-                        :
-                        <ul  className='user-info'>
-                            <li><a onClick={login}>Đăng nhập/Đăng ký</a></li>
+                    </Col>
+                    <Col xs='2' className='pt-4'>
+                        <img className='avatar' src={user.photoURL} />
+                    </Col>
+                </Row>
+                :
+                <Row>
+                    <Col xs='10'>
+                        <ul className='user-info' onClick={login}>
+                            <li><a >Đăng nhập/Đăng ký</a></li>
+                            <li><a>Tài khoản</a></li>
                         </ul>
-                    }
-
-                </div>
-                <ul className='icon'>
-                    <li>
-                        <i className="fa-solid fa-bell p-2"></i>
-                    </li>
-                    <li>
-                        <i className="fa-solid fa-user p-2"></i>
-                    </li>
-                    <li>
-                        <i className="fa-solid fa-cart-shopping p-2"></i>
-                    </li>
-                </ul>
-            </Col>
+                    </Col>
+                    <Col xs='2' className='pt-4'>
+                        <i className="fa-solid fa-user fa-2xl text-white"></i>
+                    </Col>
+                </Row>
+            }
             <Menu
                 anchorEl={anchorEl}
                 open={open}
@@ -74,7 +72,7 @@ function IconNavBar() {
                 <MenuItem onClick={logOut}>Log Out</MenuItem>
             </Menu>
             <Login openModal={modalLogin} setOpenModal={setModalLogin} setUser={setUser} />
-        </>
+        </div>
     )
 }
 export default IconNavBar;

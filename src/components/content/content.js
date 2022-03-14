@@ -58,10 +58,10 @@ function Content() {
                 <Introduce />
             </Row>
             <Row>
-                <Col xs='3'>
+                <Col xs='3' className="col-filter">
                     <FilterComponent getFilter={setFilterReceive} />
                 </Col>
-                <Col xs='9'>
+                <Col xs='9'className="col-product">
                     <ProductListComponent displayProduct={responseObj} />
                 </Col>
             </Row>

@@ -25,6 +25,7 @@ function Login({openModal, setOpenModal, setUser}) {
     useEffect(() => {
         auth.onAuthStateChanged((response)=>{
           setUser(response);
+        //   console.log(response);
         })
       }, []);
     const handleClose = () => setOpenModal(false);
