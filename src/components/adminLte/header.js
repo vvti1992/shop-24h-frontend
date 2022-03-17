@@ -17,19 +17,13 @@ function HeaderLte() {
     </ul>
     <ul className="navbar-nav ml-auto">
       <li className="nav-item">
-        <a className="nav-link" data-widget="navbar-search"  role="button">
-          <i className="fas fa-search" />
-        </a>
         <div className="navbar-search-block">
-          <form className="form-inline">
+          <form className="form-inline search-header-admin">
             <div className="input-group input-group-sm">
               <input className="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search" />
               <div className="input-group-append">
                 <button className="btn btn-navbar" type="submit">
                   <i className="fas fa-search" />
-                </button>
-                <button className="btn btn-navbar" type="button" data-widget="navbar-search">
-                  <i className="fas fa-times" />
                 </button>
               </div>
             </div>

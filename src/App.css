@@ -382,3 +382,38 @@ table tbody td button:hover {
 .model-alert-success-value {
   color: black !important;
 }
+.modal-add-customer {
+  position: absolute !important;
+  top: 50% !important;
+  left: 50% !important; 
+  transform: translate(-50%,-50%);
+  width: 800px;
+  box-shadow: 24px;
+  padding: 4px;
+  background-color: #444444;
+}
+.css-wjh20t-MuiPagination-ul{
+  position: absolute;
+  right: 0;
+  padding: 10px !important;
+}
+.table thead th {
+  vertical-align: middle !important;
+}
+.table-product thead th:nth-child(3){
+  width: 100px;
+}
+.table-product tbody tr td:nth-child(3){
+  width: 100px;
+}
+.search-header-admin {
+  padding-top: 0px !important;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%,-50%);
+}
+.main-footer {
+  position: relative;
+  bottom: 0px !important;
+}

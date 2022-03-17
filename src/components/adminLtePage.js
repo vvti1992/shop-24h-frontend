@@ -13,7 +13,7 @@ function AdminLtePage() {
             <HeaderLte/>
             <MenuLte state={state} setState={setState}/>
             {state === 0 ? <CustomerLte/> : state === 1 ? <ProductLte/> : <OrderLte/>}
-            <FooterLte/>
+            {/* <FooterLte/> */}
         </div>
     )
 }
