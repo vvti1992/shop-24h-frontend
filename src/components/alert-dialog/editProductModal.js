@@ -13,11 +13,10 @@ const style = {
     boxShadow: 24,
     p: 4,
 };
-function AddCustomerModal({ openModal, setOpenModal }) {
+function EditProductModal({ openModal, setOpenModal, product }) {
     //Đóng modal
     const handleClose = () => {
         setOpenModal(false);
-        window.location.reload();
     }
     //Hàm gọi API tạo đơn hàng
     const createOrder = async (paramUrl, paramOption = {}) => {
@@ -27,55 +26,65 @@ function AddCustomerModal({ openModal, setOpenModal }) {
     }
     //Khai báo biến lưu thông tin
     const [name, setName] = useState("");
-    const [phone, setPhone] = useState("");
-    const [email, setEmail] = useState("");
-    const [address, setAddress] = useState("");
-    const [password, setPassword] = useState("");
-    const [confirmPassword, setConfirmPassword] = useState("");
+    const [type, setType] = useState("");
+    const [brand, setBrand] = useState("");
+    const [picture, setPicture] = useState({
+        image1: "",
+        image2: "",
+        image3: "",
+        image4: "",
+        image5: ""
+    });
+    const [buyPrice, setBuyPrice] = useState(0);
+    const [promotionPrice, setPromotionPrice] = useState(0);
+    const [description, setDescription] = useState("");
+
+    useEffect(() => {
+        setName(product.name);
+        setType(product.type);
+        setBrand(product.brand);
+        setPicture({...picture,image1: product.imageUrl});
+        setBuyPrice(product.buyPrice);
+        setPromotionPrice(product.promotionPrice);
+        setDescription(product.description);
+    }, [product])
     const [modal, setModal] = useState(false);
     const [message, setMessage] = useState("");
     //hàm kiểm tra dữ liệu người dùng nhập
     const validateData = () => {
-        if (name.trim() === "") {
+        if (name === undefined || name.trim() === "") {
             setModal(true);
-            setMessage("Nhập họ tên khách hàng!");
+            setMessage("Nhập tên sản phẩm!");
             return false;
         }
-        if (email.trim() === "") {
+        if (type === undefined || type.trim() === "") {
             setModal(true);
-            setMessage("Nhập địa chỉ email khách hàng!");
+            setMessage("Nhập hệ điều hành của sản phẩm!");
             return false;
         }
-        var re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        var checkEmail = re.test(email.trim());
-        if(!checkEmail) {
+        if (brand === undefined || brand.trim() === "") {
             setModal(true);
-            setMessage("Địa chỉ email không hợp lệ!");
+            setMessage("Nhập tên nhà sản xuất!");
             return false;
         }
-        if(address.trim() === "") {
+        if (picture.image1 === undefined || picture.image1.trim() === "") {
             setModal(true);
-            setMessage("Nhập địa chỉ khách hàng!");
+            setMessage("Nhập URL hình ảnh sản phẩm!");
             return false;
         }
-        if(phone.trim() === "") {
+        if (buyPrice === undefined || buyPrice === "") {
             setModal(true);
-            setMessage("Nhập số điện thoại khách hàng!");
+            setMessage("Nhập giá gốc của sản phẩm!");
             return false;
         }
-        if(password.trim() === "") {
+        if (promotionPrice === undefined || promotionPrice === "") {
             setModal(true);
-            setMessage("Nhập mật khẩu đăng nhập!");
+            setMessage("Nhập giá khuyến mãi của sản phẩm!");
             return false;
         }
-        if(confirmPassword.trim() === "") {
+        if (description === undefined || description.trim() === "") {
             setModal(true);
-            setMessage("Nhập mật khẩu xác nhận!");
-            return false;
-        }
-        if(password !== confirmPassword) {
-            setModal(true);
-            setMessage("Mật khẩu xác thực không khớp!");
+            setMessage("Nhập mô tả thông tin sản phẩm!");
             return false;
         }
         return true;
@@ -84,14 +93,16 @@ function AddCustomerModal({ openModal, setOpenModal }) {
     const onBtnConfirmClk = () => {
         //Nếu đúng thì tạo người dùng mới
         if (validateData()) {
-            createOrder('http://localhost:8000/customers', {
-                method: 'POST',
+            createOrder('http://localhost:8000/products/' + product._id, {
+                method: 'PUT',
                 body: JSON.stringify({
-                    fullName: name,
-                    phoneNumber: phone,
-                    email: email,
-                    address: address,
-                    password: password,
+                    name: name,
+                    type: type,
+                    imageUrl: picture.image1,
+                    buyPrice: buyPrice,
+                    promotionPrice: promotionPrice,
+                    description: description,
+                    brand: brand
                 }),
                 headers: {
                     'Content-type': 'application/json; charset=UTF-8',
@@ -99,11 +110,11 @@ function AddCustomerModal({ openModal, setOpenModal }) {
             })
                 .then((data) => {
                     setModal(true);
-                    setMessage("Thêm thành công!");
+                    setMessage("Cập nhật dữ liệu thành công!");
                 })
                 .catch((error) => {
                     setModal(true);
-                    setMessage("Thêm dữ liệu bị lỗi. Vui lòng thử lại!");
+                    setMessage("Cập nhật dữ liệu bị lỗi. Vui lòng thử lại!");
                 });
         }
     }
@@ -118,78 +129,114 @@ function AddCustomerModal({ openModal, setOpenModal }) {
             >
                 <Box sx={style}>
                     <ModalHeader className='pt-0'>
-                        Thông tin khách hàng
+                        Thông tin sản phẩm
                     </ModalHeader>
                     <ModalBody>
-                        <Row>
+                        <Row className='my-2'>
                             <Col xs='6'>
-                                <TextField className='my-2'
-                                    error
-                                    id="outlined-error-helper-text"
-                                    label="Họ và tên"
-                                    helperText={name !== "" ? "" : "Nhập họ tên"}
-                                    fullWidth
-                                    required
-                                    onChange={(e) => setName(e.target.value)}
+                                <TextField id="standard-basic" label="Tên sản phẩm" variant="standard" fullWidth required
+                                    onChange={(e) => setName(e.target.value)} defaultValue={product.name}
                                 />
                             </Col>
                             <Col xs='6'>
-                                <TextField className='my-2'
-                                    error
-                                    id="outlined-error-helper-text"
-                                    label="Số điện thoại"
-                                    helperText={phone !== "" ? "" : "Nhập số điện thoại"}
-                                    fullWidth
-                                    required
-                                    type="number"
-                                    onChange={(e) => setPhone(e.target.value)}
+                                <TextField id="standard-basic" label="Nhà sản xuất" variant="standard" fullWidth required
+                                    onChange={(e) => setBrand(e.target.value)} defaultValue={product.brand}
                                 />
                             </Col>
+                        </Row>
+                        <Row className='my-2'>
                             <Col xs='6'>
-                                <TextField className='my-2'
-                                    error
-                                    id="outlined-error-helper-text"
-                                    label="Email"
-                                    helperText={email !== "" ? "" : "Nhập địa chỉ Email"}
-                                    fullWidth
-                                    required
-                                    type="email"
-                                    onChange={(e) => setEmail(e.target.value)}
-                                />
+                                <TextField id="standard-basic" label="Hệ điều hành" variant="standard" fullWidth
+                                    onChange={(e) => setType(e.target.value)} required defaultValue={product.type}/> 
                             </Col>
                             <Col xs='6'>
-                                <TextField className='my-2'
-                                    error
-                                    id="outlined-error-helper-text"
-                                    label="Địa chỉ"
-                                    helperText={address !== "" ? "" : "Nhập địa chỉ"}
-                                    fullWidth
-                                    required
-                                    onChange={(e) => setAddress(e.target.value)}
-                                />
+                                <TextField id="standard-basic" label="Năm sản xuất" variant="standard"
+                                    fullWidth required />
+                            </Col>
+                        </Row>
+                        <Row className='my-2'>
+                            <Col xs='6'>
+                                <TextField id="standard-basic" label="Giá gốc" variant="standard" type='number'
+                                    onChange={(e) => setBuyPrice(e.target.value)} fullWidth required defaultValue={product.buyPrice}/>
                             </Col>
                             <Col xs='6'>
-                                <TextField className='my-2'
-                                    error
-                                    id="outlined-error-helper-text"
-                                    label="Mật khẩu"
-                                    helperText={password !== "" ? "" : "Nhập mật khẩu đăng nhập"}
+                                <TextField id="standard-basic" label="Giá khuyến mãi" variant="standard" type='number'
+                                    onChange={(e) => setPromotionPrice(e.target.value)} fullWidth required defaultValue={product.promotionPrice}/>
+                            </Col>
+                        </Row>
+                        <Row className='my-2'>
+                            <Col xs='12'>
+                                <TextField
+                                    id="standard-textarea"
+                                    label="Mô tả sản phẩm"
+                                    multiline
+                                    variant="standard"
                                     fullWidth
-                                    type="password"
                                     required
-                                    onChange={(e) => setPassword(e.target.value)}
+                                    onChange={(e) => setDescription(e.target.value)}
+                                    defaultValue={product.description}
                                 />
                             </Col>
-                            <Col xs='6'>
-                                <TextField className='my-2'
-                                    error
-                                    id="outlined-error-helper-text"
-                                    label="Xác nhận mật khẩu"
-                                    helperText={confirmPassword !== "" ? "" : "Nhập mật khẩu xác nhận"}
+                        </Row>
+                        <Row className='my-2'>
+                            <Col xs='12'>
+                                <TextField
+                                    id="standard-textarea"
+                                    label="Url hình ảnh 1"
+                                    multiline
+                                    variant="standard"
                                     fullWidth
                                     required
-                                    type="password"
-                                    onChange={(e) => setConfirmPassword(e.target.value)}
+                                    onChange={(e) => setPicture({ ...picture, image1: e.target.value })}
+                                    defaultValue={product.imageUrl}
+                                />
+                            </Col>
+                        </Row>
+                        <Row className='my-2'>
+                            <Col xs='12'>
+                                <TextField
+                                    id="standard-textarea"
+                                    label="Url hình ảnh 2"
+                                    multiline
+                                    variant="standard"
+                                    fullWidth
+                                    onChange={(e) => setPicture({ ...picture, image2: e.target.value })}
+                                />
+                            </Col>
+                        </Row>
+                        <Row className='my-2'>
+                            <Col xs='12'>
+                                <TextField
+                                    id="standard-textarea"
+                                    label="Url hình ảnh 3"
+                                    multiline
+                                    variant="standard"
+                                    fullWidth
+                                    onChange={(e) => setPicture({ ...picture, image3: e.target.value })}
+                                />
+                            </Col>
+                        </Row>
+                        <Row className='my-2'>
+                            <Col xs='12'>
+                                <TextField
+                                    id="standard-textarea"
+                                    label="Url hình ảnh 4"
+                                    multiline
+                                    variant="standard"
+                                    fullWidth
+                                    onChange={(e) => setPicture({ ...picture, image4: e.target.value })}
+                                />
+                            </Col>
+                        </Row>
+                        <Row className='my-2'>
+                            <Col xs='12'>
+                                <TextField
+                                    id="standard-textarea"
+                                    label="Url hình ảnh 5"
+                                    multiline
+                                    variant="standard"
+                                    fullWidth
+                                    onChange={(e) => setPicture({ ...picture, image5: e.target.value })}
                                 />
                             </Col>
                         </Row>
@@ -199,11 +246,11 @@ function AddCustomerModal({ openModal, setOpenModal }) {
                             color="success"
                             onClick={onBtnConfirmClk}
                         >
-                            Thêm
+                            Cập nhật
                         </Button>
                         {' '}
                         <Button onClick={handleClose} color='warning'>
-                            Đóng
+                            Hủy
                         </Button>
                     </ModalFooter>
                 </Box>
@@ -212,4 +259,4 @@ function AddCustomerModal({ openModal, setOpenModal }) {
         </div>
     )
 }
-export default AddCustomerModal;
+export default EditProductModal;

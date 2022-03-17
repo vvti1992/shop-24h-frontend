@@ -38,79 +38,75 @@ function AddProductModal({ openModal, setOpenModal }) {
     const [buyPrice, setBuyPrice] = useState(0);
     const [promotionPrice, setPromotionPrice] = useState(0);
     const [description, setDescription] = useState("");
+    const [modal, setModal] = useState(false);
     const [message, setMessage] = useState("");
     //hàm kiểm tra dữ liệu người dùng nhập
-    // const validateData = () => {
-    //     if (name.trim() === "") {
-    //         setModal(true);
-    //         setMessage("Nhập họ tên khách hàng!");
-    //         return false;
-    //     }
-    //     if (email.trim() === "") {
-    //         setModal(true);
-    //         setMessage("Nhập địa chỉ email khách hàng!");
-    //         return false;
-    //     }
-    //     var re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    //     var checkEmail = re.test(email.trim());
-    //     if (!checkEmail) {
-    //         setModal(true);
-    //         setMessage("Địa chỉ email không hợp lệ!");
-    //         return false;
-    //     }
-    //     if (address.trim() === "") {
-    //         setModal(true);
-    //         setMessage("Nhập địa chỉ khách hàng!");
-    //         return false;
-    //     }
-    //     if (phone.trim() === "") {
-    //         setModal(true);
-    //         setMessage("Nhập số điện thoại khách hàng!");
-    //         return false;
-    //     }
-    //     if (password.trim() === "") {
-    //         setModal(true);
-    //         setMessage("Nhập mật khẩu đăng nhập!");
-    //         return false;
-    //     }
-    //     if (confirmPassword.trim() === "") {
-    //         setModal(true);
-    //         setMessage("Nhập mật khẩu xác nhận!");
-    //         return false;
-    //     }
-    //     if (password !== confirmPassword) {
-    //         setModal(true);
-    //         setMessage("Mật khẩu xác thực không khớp!");
-    //         return false;
-    //     }
-    //     return true;
-    // }
+    const validateData = () => {
+        if (name.trim() === "") {
+            setModal(true);
+            setMessage("Nhập tên sản phẩm!");
+            return false;
+        }
+        if (type.trim() === "") {
+            setModal(true);
+            setMessage("Nhập hệ điều hành của sản phẩm!");
+            return false;
+        }
+        if (brand.trim() === "") {
+            setModal(true);
+            setMessage("Nhập tên hãng sản xuất!");
+            return false;
+        }
+        if (picture.image1 === "") {
+            setModal(true);
+            setMessage("Ảnh chính bắt buộc phải nhập!");
+            return false;
+        }
+        if (buyPrice.trim() === "") {
+            setModal(true);
+            setMessage("Nhập giá gốc của sản phẩm!");
+            return false;
+        }
+        if (promotionPrice.trim() === "") {
+            setModal(true);
+            setMessage("Nhập giá khuyến mãi của sản phẩm!");
+            return false;
+        }
+        if (description.trim() === "") {
+            setModal(true);
+            setMessage("Nhập mô tả về sản phẩm!");
+            return false;
+        }
+        return true;
+    }
     //Khi nhấn nút xác nhận
     const onBtnConfirmClk = () => {
         //Nếu đúng thì tạo người dùng mới
-        // if (validateData()) {
-        //     createOrder('http://localhost:8000/customers', {
-        //         method: 'POST',
-        //         body: JSON.stringify({
-        //             fullName: name,
-        //             phoneNumber: phone,
-        //             email: email,
-        //             address: address,
-        //             password: password,
-        //         }),
-        //         headers: {
-        //             'Content-type': 'application/json; charset=UTF-8',
-        //         },
-        //     })
-        //         .then((data) => {
-        //             setModal(true);
-        //             setMessage("Thêm thành công!");
-        //         })
-        //         .catch((error) => {
-        //             setModal(true);
-        //             setMessage("Thêm dữ liệu bị lỗi. Vui lòng thử lại!");
-        //         });
-        // }
+        if (validateData()) {
+            createOrder('http://localhost:8000/products', {
+                method: 'POST',
+                body: JSON.stringify({
+                    name: name,
+                    type: type,
+                    imageUrl: picture.image1,
+                    buyPrice: buyPrice,
+                    promotionPrice: promotionPrice,
+                    description: description,
+                    brand: brand
+                }),
+                headers: {
+                    'Content-type': 'application/json; charset=UTF-8',
+                },
+            })
+                .then((data) => {
+                    setModal(true);
+                    setMessage("Thêm sản phẩm mới thành công!");
+                })
+                .catch((error) => {
+                    setModal(true);
+                    setMessage("Thêm dữ liệu bị lỗi. Vui lòng thử lại!");
+                });
+        }
     }
 
     return (
@@ -128,26 +124,34 @@ function AddProductModal({ openModal, setOpenModal }) {
                     <ModalBody>
                         <Row className='my-2'>
                             <Col xs='6'>
-                                <TextField id="standard-basic" label="Tên sản phẩm" variant="standard" fullWidth required/>
+                                <TextField id="standard-basic" label="Tên sản phẩm" variant="standard" fullWidth required
+                                    onChange={(e) => setName(e.target.value)}
+                                />
                             </Col>
                             <Col xs='6'>
-                                <TextField id="standard-basic" label="Nhà sản xuất" variant="standard" fullWidth required/>
-                            </Col>
-                        </Row>
-                        <Row className='my-2'>
-                            <Col xs='6'>
-                                <TextField id="standard-basic" label="Hệ điều hành" variant="standard" fullWidth required/>
-                            </Col>
-                            <Col xs='6'>
-                                <TextField id="standard-basic" label="Năm sản xuất" variant="standard" fullWidth required/>
+                                <TextField id="standard-basic" label="Nhà sản xuất" variant="standard" fullWidth required
+                                    onChange={(e) => setBrand(e.target.value)}
+                                />
                             </Col>
                         </Row>
                         <Row className='my-2'>
                             <Col xs='6'>
-                                <TextField id="standard-basic" label="Giá gốc" variant="standard" fullWidth required/>
+                                <TextField id="standard-basic" label="Hệ điều hành" variant="standard" fullWidth
+                                    onChange={(e) => setType(e.target.value)} required />
                             </Col>
                             <Col xs='6'>
-                                <TextField id="standard-basic" label="Giá khuyến mãi" variant="standard" fullWidth required/>
+                                <TextField id="standard-basic" label="Năm sản xuất" variant="standard"
+                                    fullWidth required />
+                            </Col>
+                        </Row>
+                        <Row className='my-2'>
+                            <Col xs='6'>
+                                <TextField id="standard-basic" label="Giá gốc" variant="standard" type='number'
+                                    onChange={(e) => setBuyPrice(e.target.value)} fullWidth required />
+                            </Col>
+                            <Col xs='6'>
+                                <TextField id="standard-basic" label="Giá khuyến mãi" variant="standard" type='number'
+                                    onChange={(e) => setPromotionPrice(e.target.value)} fullWidth required />
                             </Col>
                         </Row>
                         <Row className='my-2'>
@@ -159,6 +163,7 @@ function AddProductModal({ openModal, setOpenModal }) {
                                     variant="standard"
                                     fullWidth
                                     required
+                                    onChange={(e) => setDescription(e.target.value)}
                                 />
                             </Col>
                         </Row>
@@ -171,6 +176,7 @@ function AddProductModal({ openModal, setOpenModal }) {
                                     variant="standard"
                                     fullWidth
                                     required
+                                    onChange={(e) => setPicture({ ...picture, image1: e.target.value })}
                                 />
                             </Col>
                         </Row>
@@ -182,6 +188,7 @@ function AddProductModal({ openModal, setOpenModal }) {
                                     multiline
                                     variant="standard"
                                     fullWidth
+                                    onChange={(e) => setPicture({ ...picture, image2: e.target.value })}
                                 />
                             </Col>
                         </Row>
@@ -193,6 +200,7 @@ function AddProductModal({ openModal, setOpenModal }) {
                                     multiline
                                     variant="standard"
                                     fullWidth
+                                    onChange={(e) => setPicture({ ...picture, image3: e.target.value })}
                                 />
                             </Col>
                         </Row>
@@ -204,6 +212,7 @@ function AddProductModal({ openModal, setOpenModal }) {
                                     multiline
                                     variant="standard"
                                     fullWidth
+                                    onChange={(e) => setPicture({ ...picture, image4: e.target.value })}
                                 />
                             </Col>
                         </Row>
@@ -215,6 +224,7 @@ function AddProductModal({ openModal, setOpenModal }) {
                                     multiline
                                     variant="standard"
                                     fullWidth
+                                    onChange={(e) => setPicture({ ...picture, image5: e.target.value })}
                                 />
                             </Col>
                         </Row>
@@ -233,7 +243,7 @@ function AddProductModal({ openModal, setOpenModal }) {
                     </ModalFooter>
                 </Box>
             </Modal>
-            {/* <ModalAddNewUser openAlertModal={modal} setOpenAlertModal={setModal} message={message} /> */}
+            <ModalAddNewUser openAlertModal={modal} setOpenAlertModal={setModal} message={message} />
         </div>
     )
 }

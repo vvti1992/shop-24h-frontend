@@ -18,21 +18,27 @@ function CustomerLte() {
         address: null,
         password: null,
     });
+    const limitRow = 5; //10 dòng cho mỗi trang
     const [page, setPage] = useState(1);
+    const [posts, setPosts] = useState([]);
     const [noPage, setNoPage] = useState(1);
     const changePage = (event, value) => {
         setPage(value);
+        window.scrollTo(0,0);
     }
     //set open modal
     const [openAddModalInfo, setAddOpenModalInfo] = useState(false);
     const [openEditModalInfo, setEditOpenModalInfo] = useState(false);
     useEffect(() => {
         fetchApi('http://localhost:8000/customers')
-            .then((data) => {
-                setData(data.Customers);
-            })
-            .catch(console.error());
-    }, [])
+        .then((data) => {
+            setNoPage(Math.ceil(data.Customers.length / limitRow));
+            setPosts(data.Customers.slice(page * limitRow - limitRow, page * limitRow));
+        }).catch((error) => {
+            console.log(error);
+        });
+}, [page]);
+// console.log(posts);
     //Add new user
     const AddUser = () => {
         setAddOpenModalInfo(true);
@@ -82,7 +88,7 @@ function CustomerLte() {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {data.map((element, index) => (
+                                    {posts.map((element, index) => (
                                         <tr key={index}>
                                             <td>
                                                 {index + 1}
@@ -107,7 +113,7 @@ function CustomerLte() {
                                     ))}
                                 </tbody>
                             </Table>
-                            <Pagination count={10} color="primary" defaultPage={page} onChange={changePage} />
+                            <Pagination count={noPage} color="primary" defaultPage={page} onChange={changePage} />
                         </div>
                     </div>
                 </section>

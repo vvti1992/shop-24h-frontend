@@ -3,6 +3,7 @@ import { Table } from 'react-bootstrap';
 import { Pagination } from '@mui/material';
 import DeleteProductModal from '../alert-dialog/deleteProductModal';
 import AddProductModal from '../alert-dialog/addProductModal';
+import EditProductModal from '../alert-dialog/editProductModal';
 
 function ProductLte() {
     const fetchApi = async (paramUrl, paramOption = {}) => {
@@ -32,6 +33,15 @@ function ProductLte() {
     const [addProductModal, setAddProductModal] = useState(false);
     const [editProductModal, setEditProductModal] = useState(false);
     const [deleteProductModal, setDeleteProductModal] = useState(false);
+    const [product, setProduct] = useState({
+        name: "",
+        type: "",
+        imageUrl: "",
+        buyPrice: "",
+        promotionPrice: "",
+        description: "",
+        brand: "",
+    });
     const [productId, setProductId] = useState("");
     //Add new product
     const AddProduct = () => {
@@ -39,7 +49,8 @@ function ProductLte() {
     }
     //Edit product
     const EditProduct = (product) => {
-        console.log(product);
+        setProduct(product)
+        setEditProductModal(true);
     };
     //delete product
     const DeleteProduct = (product) => {
@@ -129,6 +140,7 @@ function ProductLte() {
                 </section>
             </div>
             <AddProductModal openModal={addProductModal} setOpenModal={setAddProductModal} />
+            <EditProductModal openModal={editProductModal} setOpenModal={setEditProductModal} product={product}/>
             <DeleteProductModal openAlertModal={deleteProductModal} setOpenAlertModal= {setDeleteProductModal} productId = {productId}/>
         </div>
 
