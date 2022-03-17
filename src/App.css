@@ -123,6 +123,13 @@ label {
   transform: translate(-50%,0%);
   padding: 20px;
 }
+.message p a {
+  color: blue !important;
+  text-decoration: underline !important;
+}
+.message p a:hover {
+  cursor: pointer;
+}
 .avatar{
   width: 30px;
   height: 30px;
@@ -203,6 +210,7 @@ img.card-img-top:hover {
 h5.card-title {
   font-size: 15px;
   font-weight: 700;
+  width: 100%;
 }
 h5.card-title:hover {
   color: #288ad6;
@@ -272,8 +280,8 @@ button.btn-search {
 
 .form-group i{
   position: relative;
-  left: -30px;
-  top: 10px;
+  left: -45px;
+  top: 0px;
   color: #707070;
 }
 /* .icon-bar {
@@ -305,8 +313,10 @@ button.btn-search {
   right: 200px !important;
 }
 table.order-table {
-  vertical-align: middle;
   text-align: center;
+}
+.table td {
+  vertical-align: middle !important;
 }
 table tbody td .edit-number {
   border: .5px solid darkgrey;
@@ -348,4 +358,27 @@ table tbody td button:hover {
 }
 .sum-money p span {
   color: red;
+}
+.login-fail {
+  color: red;
+  text-align: justify;
+}
+.form-signup {
+  background-color: #263c52;
+  margin: auto;
+  margin-top: 5rem;
+  position: 'absolute';
+  top: '50%';
+  left: '50%';
+  width: 400px;
+  transform: 'translate(-50%, -50%)';
+  box-shadow: 24;
+  padding: 10px;
+  border-radius: 2%;
+}
+.form-signup .row {
+  margin: 20px 0px !important;
+}
+.model-alert-success-value {
+  color: black !important;
 }

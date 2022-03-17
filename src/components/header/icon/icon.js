@@ -1,15 +1,30 @@
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { useState, useEffect } from 'react';
 import { Row, Col } from 'reactstrap';
-
+import { useSelector, useDispatch } from "react-redux";
+import { selectUserLogin} from '../../../Redux/userslice'
 import { Menu, MenuItem } from '@mui/material';
 import { auth } from '../../../firebase';
 import Login from '../../login/Login';
+import { setUserLogin } from "../../../Redux/userslice";
+import { useNavigate } from 'react-router-dom';
+import avatar from '../../../assets/images/avatar/unnamed.png'
 
 function IconNavBar() {
     const [anchorEl, setAnchorEl] = useState(null);
-    const [user, setUser] = useState(null);
-    const [modalLogin, setModalLogin] = useState(false)
+    const user = useSelector(selectUserLogin);
+    const navigate = useNavigate();
+    // console.log(user);
+    const [modalLogin, setModalLogin] = useState(false);
+    const dispatch = useDispatch();
+    const userLogin = {
+        fullName: "",
+        phoneNumber: "",
+        email: "",
+        address: "",
+        city: "",
+        country: "",
+    }
     const open = Boolean(anchorEl);
     const showUserInfo = (event) => {
         setAnchorEl(event.currentTarget);
@@ -19,8 +34,9 @@ function IconNavBar() {
     };
     const logOut = () => {
         auth.signOut().then(() => {
-            setUser(null);
             setAnchorEl(null);
+            dispatch(setUserLogin(userLogin));
+            navigate("/")
 
         }).catch((error) => {
             console.log(error);
@@ -31,16 +47,16 @@ function IconNavBar() {
     };
     return (
         <div>
-            {user ?
+            {user.email !== "" ?
                 <Row  >
                     <Col xs='10'>
                         <ul className='user-info'>
-                            <li onClick={showUserInfo}><a >Tài khoản</a></li>
-                            <li onClick={showUserInfo}>{user.displayName}</li>
+                            <li onPointerMove={showUserInfo}><a >Tài khoản</a></li>
+                            <li onPointerMove={showUserInfo}>{user.fullName}</li>
                         </ul>
                     </Col>
-                    <Col xs='2' className='pt-4'>
-                        <img className='avatar' src={user.photoURL} />
+                    <Col xs='2' className='pt-4' onPointerMove={showUserInfo}>
+                    {user.photoURL !== "" ? <img className='avatar' src={avatar} /> : <img className='avatar' src={avatar}/>}
                     </Col>
                 </Row>
                 :
@@ -59,7 +75,7 @@ function IconNavBar() {
             <Menu
                 anchorEl={anchorEl}
                 open={open}
-                onClose={handleClose}
+                onPointerLeave={handleClose}
                 anchorOrigin={{
                     vertical: 'top',
                     horizontal: 'left',
@@ -69,9 +85,11 @@ function IconNavBar() {
                     horizontal: 'left',
                 }}
             >
-                <MenuItem onClick={logOut}>Log Out</MenuItem>
+                <MenuItem onClick={logOut}>Thông tin tài khoản</MenuItem>
+                <MenuItem onClick={logOut}>Đơn hàng của tôi</MenuItem>
+                <MenuItem onClick={logOut}>Đăng xuất</MenuItem>
             </Menu>
-            <Login openModal={modalLogin} setOpenModal={setModalLogin} setUser={setUser} />
+            <Login openModal={modalLogin} setOpenModal={setModalLogin}/>
         </div>
     )
 }

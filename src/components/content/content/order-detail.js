@@ -1,14 +1,17 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Container, Table, Row, Col, Button } from "reactstrap";
-import { selectUserName, selectProduct } from "../../../Redux/userslice";
+import { selectProduct, selectUserLogin } from "../../../Redux/userslice";
 import { useNavigate } from 'react-router-dom';
 import { deleteProduct, increaseQuatity, decreaseQuatity } from "../../../Redux/userslice";
+import Login from "../../login/Login";
 
 
 function OrderDetail() {
     const dispatch = useDispatch();
+    const userLogin = useSelector(selectUserLogin);
     const product = useSelector(selectProduct);
+    const [modalLogin, setModalLogin] = useState(false)
     // console.log(product);
     const navigate = useNavigate();
     const backHomePage = () => {
@@ -34,6 +37,21 @@ function OrderDetail() {
     const onBtnDelClk = (data, index) =>{
         // console.log(data);
         dispatch(deleteProduct(index));
+    }
+    const createNewOrder = () => {
+        if(userLogin.email !== "") {
+            //Chuyển sang trang hiển thị thông tin người mua
+            navigate("/confirm_order");
+            window.scrollTo(0, 0);
+        }
+        else {
+            //chuyển sang trang đăng nhập
+            setModalLogin(true);
+        }
+    }
+    const buyMoreProduct = () => {
+        navigate("/");
+        window.scrollTo(0, 0);
     }
     return (
         <Container>
@@ -101,16 +119,17 @@ function OrderDetail() {
                     <Col xs='4'>
                         <div className= 'sum-money'>
                             <p>Tổng tiền tạm tính: <span> {sumMoney().toLocaleString()}</span> VNĐ</p>
-                            <button className = 'btn-buy-order'>
+                            <button className = 'btn-buy-order' onClick={createNewOrder}>
                                 TIẾN HÀNH ĐẶT HÀNG
                             </button>
-                            <button className = 'btn-more-product'>
+                            <button className = 'btn-more-product' onClick={buyMoreProduct}>
                                 CHỌN THÊM CÁC SẢN PHẨM KHÁC
                             </button>
                             </div>
                     </Col>
                 </Row>
             }
+            <Login openModal={modalLogin} setOpenModal={setModalLogin}/>
         </Container>
     )
 }

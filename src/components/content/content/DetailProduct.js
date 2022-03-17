@@ -8,6 +8,7 @@ import image4 from '../../../assets/images/galaxy s8/Blue_4.jpg';
 import image5 from '../../../assets/images/galaxy s8/Blue_5.jpg';
 import { useNavigate } from "react-router-dom";
 import { updateNumber, addProduct } from "../../../Redux/userslice";
+import AlertSuccess from "../../alert-dialog/alert-success";
 
 function DetailProduct({ id }) {
     const dispatch = useDispatch();
@@ -23,7 +24,8 @@ function DetailProduct({ id }) {
         timeCreated: null,
         timeUpdate: null
     });
-
+    const [openModelNotify, setOpenModelNotify] = useState(false);
+    const [messageModel, setMessageModal] = useState("");
     const [number, setNumber] = useState(1);
     const [relativeProduct, setRelativeProduct] = useState([]);
     const [bigImage, setBigImage] = useState("");
@@ -87,6 +89,8 @@ function DetailProduct({ id }) {
         }
         dispatch(updateNumber(productObject));
         dispatch(addProduct(productObject));
+        setOpenModelNotify(true);
+        setMessageModal("Sản phẩm đã được thêm vào giỏ hàng thành công!");
     }
   
     const navigate = useNavigate();
@@ -160,7 +164,9 @@ function DetailProduct({ id }) {
                 </Col>
             </Row>
             <hr />
+            <AlertSuccess open = {openModelNotify} setOpen = {setOpenModelNotify} message= {messageModel}/>
         </Container>
+        
     )
 };
 export default DetailProduct;

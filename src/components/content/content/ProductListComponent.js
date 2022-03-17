@@ -10,11 +10,6 @@ function ProductListComponent({ displayProduct }) {
     const NO_PAGE = Math.ceil(displayProduct.length / LIMIT_PRODUCT_PER_PAGE);
     const [seletePage, setSelectPage] = useState(1);
     const [posts, setPosts] = useState([]);
-    const fetchApi = async (paramUrl, paramOption = {}) => {
-        const response = await fetch(paramUrl, paramOption);
-        const responseData = await response.json();
-        return responseData;
-    }
     useEffect(() => {
         if (displayProduct.length > 12)
             setPosts(displayProduct.slice(seletePage * LIMIT_PRODUCT_PER_PAGE - LIMIT_PRODUCT_PER_PAGE, seletePage * LIMIT_PRODUCT_PER_PAGE));
