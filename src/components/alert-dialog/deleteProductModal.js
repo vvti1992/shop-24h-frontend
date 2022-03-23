@@ -2,9 +2,10 @@ import { Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions, B
 import { useState } from 'react';
 import ModalAddNewUser from './alertModa-addNewUser';
 
-function DeleteProductModal({openAlertModal, setOpenAlertModal, productId}) {
+function DeleteProductModal({openAlertModal, setOpenAlertModal, productId, state, setState}) {
     const handleClose = () => {
         setOpenAlertModal(false);
+        setState(!state);
     };
     const API = async (paramUrl, paramOption = {}) => {
         const Fetch = await fetch(paramUrl, paramOption);

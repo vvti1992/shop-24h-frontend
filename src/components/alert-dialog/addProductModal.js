@@ -13,10 +13,12 @@ const style = {
     boxShadow: 24,
     p: 4,
 };
-function AddProductModal({ openModal, setOpenModal }) {
+function AddProductModal({ openModal, setOpenModal, state, setState }) {
     //Đóng modal
     const handleClose = () => {
         setOpenModal(false);
+        setState(!state);
+        setMode(!mode);
     }
     //Hàm gọi API tạo đơn hàng
     const createOrder = async (paramUrl, paramOption = {}) => {
@@ -40,6 +42,17 @@ function AddProductModal({ openModal, setOpenModal }) {
     const [description, setDescription] = useState("");
     const [modal, setModal] = useState(false);
     const [message, setMessage] = useState("");
+    const [mode, setMode] = useState(false);
+    //clear dữ liệu khi đóng modal
+    useEffect(() => {
+        setName("");
+        setType("");
+        setBrand("");
+        setPicture({...picture, image1:"",image2:"",image3:"",image4:"",image5:""});
+        setBuyPrice(0);
+        setPromotionPrice(0);
+        setDescription("");
+    },[mode]);
     //hàm kiểm tra dữ liệu người dùng nhập
     const validateData = () => {
         if (name.trim() === "") {

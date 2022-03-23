@@ -40,12 +40,12 @@ function DetailPage() {
                 <Breadcrumb>
                     <BreadcrumbItem>
                         <a href='/'>
-                            Home
+                            Trang chủ
                         </a>
                     </BreadcrumbItem>
                     <BreadcrumbItem>
                         <a href='/'>
-                            Product
+                            Sản phẩm
                         </a>
                     </BreadcrumbItem>
                     <BreadcrumbItem>

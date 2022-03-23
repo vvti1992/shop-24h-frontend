@@ -124,14 +124,14 @@ function DetailProduct({ id }) {
                         <button className="btn-detail" onClick={increaseBtn}>+</button>
                     </div>
                     <div className="pt-3">
-                        <button className="btn-add-to-card" onClick={buyProduct}>ADD TO CART</button>
+                        <button className="btn-add-to-card" onClick={buyProduct}>THÊM VÀO GIỎ HÀNG</button>
                     </div>
                 </Col>
                 <p className="detail-description">{product.description}</p> <hr />
             </Row>
             <Row>
                 <Col xs='12'>
-                    <h5 className="text-center text-bold">REFERENCE PRODUCTS</h5>
+                    <h5 className="text-center text-bold">THAM KHẢO SẢN PHẨM KHÁC</h5>
                     {
                         relativeProduct.map((element, index) => (
                             <div key={index} className="box-product-detail" onClick={() =>HandleDetailClick(element)}>

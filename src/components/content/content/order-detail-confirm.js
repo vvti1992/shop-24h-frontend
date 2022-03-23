@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { Button, Col, Container, Input, Label, Row, Table } from "reactstrap";
 import { decreaseQuatity, deleteProduct, increaseQuatity, selectProduct, selectUserLogin, setUserLogin, deleteAllProduct } from "../../../Redux/userslice";
 import AlertModal from "../../alert-dialog/alertModal";
+import WarningDeleteProductModal from "../../alert-dialog/warning-deleteProduct";
 
 
 function OrderDetailConfirm() {
@@ -12,7 +13,9 @@ function OrderDetailConfirm() {
     const dispatch = useDispatch();
     //Thông tin open modal và message hiển thị lên modal
     const [openAlertModal, setOpenAlertModal] = useState(false);
-    const [content, setContent] = useState("")
+    const [content, setContent] = useState("");
+    const [modalWarning, setOpenModalWarning] = useState(false);
+    const [index, setIndex] = useState(null);
     // console.log(product);
     const navigate = useNavigate();
     const backHomePage = () => {
@@ -53,7 +56,8 @@ function OrderDetailConfirm() {
     //Khi nhấn nút delete
     const onBtnDelClk = (data, index) => {
         // console.log(data);
-        dispatch(deleteProduct(index));
+        setOpenModalWarning(true);
+        setIndex(index);
     }
     const sumMoney = () => {
         var sum = 0;
@@ -274,6 +278,7 @@ function OrderDetailConfirm() {
                 }
             </Container>
             <AlertModal openAlertModal={openAlertModal} setOpenAlertModal={setOpenAlertModal} message={content} />
+            <WarningDeleteProductModal openModal={modalWarning} setOpenModal= {setOpenModalWarning} product={index} />
         </>
     )
 }

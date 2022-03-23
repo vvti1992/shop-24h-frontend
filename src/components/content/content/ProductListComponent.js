@@ -24,7 +24,7 @@ function ProductListComponent({ displayProduct }) {
         <Container>
             <Row>
                 <Col xs='12'>
-                    <h4 className="text-center py-4">PRODUCTS LIST</h4> <hr />
+                    <h4 className="text-center py-4">DANH SÁCH SẢN PHẨM</h4> <hr />
                     {
                         posts.map((element, index) => (
                             <div key={index} className="box-product" onClick={() =>HandleDetailClick(element)}>

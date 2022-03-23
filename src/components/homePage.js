@@ -2,26 +2,28 @@ import Header from './header/header';
 import Content from './content/content';
 import Footer from './footer/footer';
 import { Breadcrumb, BreadcrumbItem, Container } from "reactstrap";
+import { useState } from 'react';
 
 function HomePage() {
+    const [keySearch, setKeySearch] = useState("");
     return (
         <>
-            <Header />
+            <Header setKeySearch={setKeySearch}/>
             <Container>
                 <Breadcrumb>
                     <BreadcrumbItem>
                         <a href='/'>
-                            Home
+                            Trang chủ
                         </a>
                     </BreadcrumbItem>
                     <BreadcrumbItem>
                         <a>
-                            Product
+                            Sản phẩm
                         </a>
                     </BreadcrumbItem>
                 </Breadcrumb>
             </Container>
-            <Content />
+            <Content keySearch = {keySearch}/>
             <Footer />
         </>
     )

@@ -13,11 +13,12 @@ const style = {
     boxShadow: 24,
     p: 4,
 };
-function AddCustomerModal({ openModal, setOpenModal }) {
+function AddCustomerModal({ openModal, setOpenModal, state, setState }) {
     //Đóng modal
     const handleClose = () => {
         setOpenModal(false);
-        window.location.reload();
+        setState(!state);
+        setMode(!mode);
     }
     //Hàm gọi API tạo đơn hàng
     const createOrder = async (paramUrl, paramOption = {}) => {
@@ -34,6 +35,16 @@ function AddCustomerModal({ openModal, setOpenModal }) {
     const [confirmPassword, setConfirmPassword] = useState("");
     const [modal, setModal] = useState(false);
     const [message, setMessage] = useState("");
+    const [mode, setMode] = useState(false);
+    //clear dữ liệu khi đóng modal
+    useEffect(() => {
+        setName("");
+        setPhone("");
+        setEmail("");
+        setAddress("");
+        setPassword("");
+        setConfirmPassword("");
+    },[mode]);
     //hàm kiểm tra dữ liệu người dùng nhập
     const validateData = () => {
         if (name.trim() === "") {

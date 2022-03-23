@@ -7,6 +7,7 @@ import Login from './components/login/Login';
 import OrderDetailConfirmPage from './components/order-detail-confirm-page';
 import OrderDetailPage from './components/order-detail-page';
 import AdminLtePage from './components/adminLtePage';
+import ViewOrderPage from './components/view-order-page';
 function App() {
   return (
     <div >
@@ -17,6 +18,7 @@ function App() {
         <Route path="/buyorder" element={<OrderDetailPage/>}></Route>
         <Route path="/confirm_order" element={<OrderDetailConfirmPage/>}></Route>
         <Route path="/admin" element={<AdminLtePage/>}></Route>
+        <Route path='/my-order' element = {<ViewOrderPage/>}></Route>
       </Routes>
     </div>
   );

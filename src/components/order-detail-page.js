@@ -13,12 +13,12 @@ function OrderDetailPage() {
                 <Breadcrumb>
                     <BreadcrumbItem>
                         <a href='/'>
-                            Home
+                            Trang chủ
                         </a>
                     </BreadcrumbItem>
                     <BreadcrumbItem>
                         <a href='/'>
-                            Card
+                            Giỏ hàng
                         </a>
                     </BreadcrumbItem>
                 </Breadcrumb>

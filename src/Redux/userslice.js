@@ -39,10 +39,12 @@ export const userSlice = createSlice({
             localStorage.setItem("user", JSON.stringify(state.userLogin));
         },
         increaseQuatity: (state, action) => {
+            if (state.product[action.payload].number < 10) {
             state.product[action.payload].number = state.product[action.payload].number + 1;
             state.number = state.number + 1;
             localStorage.setItem("number", state.number);
             localStorage.setItem("product", JSON.stringify(state.product));
+            }
         },
         decreaseQuatity: (state, action) => {
             if (state.product[action.payload].number > 1) {

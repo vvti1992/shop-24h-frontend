@@ -13,10 +13,11 @@ const style = {
     boxShadow: 24,
     p: 4,
 };
-function EditProductModal({ openModal, setOpenModal, product }) {
+function EditProductModal({ openModal, setOpenModal, product, state, setState}) {
     //Đóng modal
     const handleClose = () => {
         setOpenModal(false);
+        setState(!state);
     }
     //Hàm gọi API tạo đơn hàng
     const createOrder = async (paramUrl, paramOption = {}) => {
@@ -24,76 +25,76 @@ function EditProductModal({ openModal, setOpenModal, product }) {
         const response = await Fetch.json();
         return response;
     }
-    //Khai báo biến lưu thông tin
-    const [name, setName] = useState("");
-    const [type, setType] = useState("");
-    const [brand, setBrand] = useState("");
-    const [picture, setPicture] = useState({
-        image1: "",
-        image2: "",
-        image3: "",
-        image4: "",
-        image5: ""
-    });
-    const [buyPrice, setBuyPrice] = useState(0);
-    const [promotionPrice, setPromotionPrice] = useState(0);
-    const [description, setDescription] = useState("");
-
-    useEffect(() => {
-        setName(product.name);
-        setType(product.type);
-        setBrand(product.brand);
-        setPicture({...picture,image1: product.imageUrl});
-        setBuyPrice(product.buyPrice);
-        setPromotionPrice(product.promotionPrice);
-        setDescription(product.description);
-    }, [product])
-    const [modal, setModal] = useState(false);
-    const [message, setMessage] = useState("");
-    //hàm kiểm tra dữ liệu người dùng nhập
-    const validateData = () => {
-        if (name === undefined || name.trim() === "") {
-            setModal(true);
-            setMessage("Nhập tên sản phẩm!");
-            return false;
+        const [name, setName] = useState("");
+        const [type, setType] = useState("");
+        const [brand, setBrand] = useState("");
+        const [picture, setPicture] = useState({
+            image1: "",
+            image2: "",
+            image3: "",
+            image4: "",
+            image5: ""
+        });
+        const [buyPrice, setBuyPrice] = useState(0);
+        const [promotionPrice, setPromotionPrice] = useState(0);
+        const [description, setDescription] = useState("");
+    
+        useEffect(() => {
+            setName(product.name);
+            setType(product.type);
+            setBrand(product.brand);
+            setPicture({...picture,image1: product.imageUrl});
+            setBuyPrice(product.buyPrice);
+            setPromotionPrice(product.promotionPrice);
+            setDescription(product.description);
+        }, [product])
+        const [modal, setModal] = useState(false);
+        const [message, setMessage] = useState("");
+        //hàm kiểm tra dữ liệu người dùng nhập
+        const validateData = () => {
+            if (name === undefined || name.trim() === "") {
+                setModal(true);
+                setMessage("Nhập tên sản phẩm!");
+                return false;
+            }
+            if (type === undefined || type.trim() === "") {
+                setModal(true);
+                setMessage("Nhập hệ điều hành của sản phẩm!");
+                return false;
+            }
+            if (brand === undefined || brand.trim() === "") {
+                setModal(true);
+                setMessage("Nhập tên nhà sản xuất!");
+                return false;
+            }
+            if (picture.image1 === undefined || picture.image1.trim() === "") {
+                setModal(true);
+                setMessage("Nhập URL hình ảnh sản phẩm!");
+                return false;
+            }
+            if (buyPrice === undefined || buyPrice === "") {
+                setModal(true);
+                setMessage("Nhập giá gốc của sản phẩm!");
+                return false;
+            }
+            if (promotionPrice === undefined || promotionPrice === "") {
+                setModal(true);
+                setMessage("Nhập giá khuyến mãi của sản phẩm!");
+                return false;
+            }
+            if (description === undefined || description.trim() === "") {
+                setModal(true);
+                setMessage("Nhập mô tả thông tin sản phẩm!");
+                return false;
+            }
+            return true;
         }
-        if (type === undefined || type.trim() === "") {
-            setModal(true);
-            setMessage("Nhập hệ điều hành của sản phẩm!");
-            return false;
-        }
-        if (brand === undefined || brand.trim() === "") {
-            setModal(true);
-            setMessage("Nhập tên nhà sản xuất!");
-            return false;
-        }
-        if (picture.image1 === undefined || picture.image1.trim() === "") {
-            setModal(true);
-            setMessage("Nhập URL hình ảnh sản phẩm!");
-            return false;
-        }
-        if (buyPrice === undefined || buyPrice === "") {
-            setModal(true);
-            setMessage("Nhập giá gốc của sản phẩm!");
-            return false;
-        }
-        if (promotionPrice === undefined || promotionPrice === "") {
-            setModal(true);
-            setMessage("Nhập giá khuyến mãi của sản phẩm!");
-            return false;
-        }
-        if (description === undefined || description.trim() === "") {
-            setModal(true);
-            setMessage("Nhập mô tả thông tin sản phẩm!");
-            return false;
-        }
-        return true;
-    }
+    
     //Khi nhấn nút xác nhận
     const onBtnConfirmClk = () => {
         //Nếu đúng thì tạo người dùng mới
         if (validateData()) {
-            createOrder('http://localhost:8000/products/' + product._id, {
+            createOrder('http://localhost:8000/customers/' + product._id, {
                 method: 'PUT',
                 body: JSON.stringify({
                     name: name,

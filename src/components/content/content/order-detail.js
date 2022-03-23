@@ -1,9 +1,9 @@
-import { useEffect, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { Container, Table, Row, Col, Button } from "reactstrap";
-import { selectProduct, selectUserLogin } from "../../../Redux/userslice";
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from 'react-router-dom';
-import { deleteProduct, increaseQuatity, decreaseQuatity } from "../../../Redux/userslice";
+import { Button, Col, Container, Row, Table } from "reactstrap";
+import { decreaseQuatity, increaseQuatity, selectProduct, selectUserLogin } from "../../../Redux/userslice";
+import WarningDeleteProductModal from "../../alert-dialog/warning-deleteProduct";
 import Login from "../../login/Login";
 
 
@@ -11,7 +11,9 @@ function OrderDetail() {
     const dispatch = useDispatch();
     const userLogin = useSelector(selectUserLogin);
     const product = useSelector(selectProduct);
-    const [modalLogin, setModalLogin] = useState(false)
+    const [modalLogin, setModalLogin] = useState(false);
+    const [modalWarning, setOpenModalWarning] = useState(false);
+    const [index, setIndex] = useState(null);
     // console.log(product);
     const navigate = useNavigate();
     const backHomePage = () => {
@@ -36,7 +38,8 @@ function OrderDetail() {
     //Khi nhấn nút delete
     const onBtnDelClk = (data, index) =>{
         // console.log(data);
-        dispatch(deleteProduct(index));
+        setOpenModalWarning(true);
+        setIndex(index);
     }
     const createNewOrder = () => {
         if(userLogin.email !== "") {
@@ -130,6 +133,7 @@ function OrderDetail() {
                 </Row>
             }
             <Login openModal={modalLogin} setOpenModal={setModalLogin}/>
+            <WarningDeleteProductModal openModal={modalWarning} setOpenModal= {setOpenModalWarning} product={index} />
         </Container>
     )
 }

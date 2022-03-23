@@ -18,7 +18,7 @@ function CustomerLte() {
         address: null,
         password: null,
     });
-    const limitRow = 5; //10 dòng cho mỗi trang
+    const limitRow = 10; //10 dòng cho mỗi trang
     const [page, setPage] = useState(1);
     const [posts, setPosts] = useState([]);
     const [noPage, setNoPage] = useState(1);
@@ -26,6 +26,7 @@ function CustomerLte() {
         setPage(value);
         window.scrollTo(0,0);
     }
+    const [state, setState] = useState(false);
     //set open modal
     const [openAddModalInfo, setAddOpenModalInfo] = useState(false);
     const [openEditModalInfo, setEditOpenModalInfo] = useState(false);
@@ -37,7 +38,7 @@ function CustomerLte() {
         }).catch((error) => {
             console.log(error);
         });
-}, [page]);
+}, [page, state]);
 // console.log(posts);
     //Add new user
     const AddUser = () => {
@@ -118,8 +119,8 @@ function CustomerLte() {
                     </div>
                 </section>
             </div>
-            <AddCustomerModal openModal={openAddModalInfo} setOpenModal={setAddOpenModalInfo} />
-            <EditCustomerModal openModal={openEditModalInfo} setOpenModal={setEditOpenModalInfo} user={user} />
+            <AddCustomerModal openModal={openAddModalInfo} setOpenModal={setAddOpenModalInfo} state={state} setState = {setState}/>
+            <EditCustomerModal openModal={openEditModalInfo} setOpenModal={setEditOpenModalInfo} user={user} state={state} setState = {setState}/>
         </div>
 
     )

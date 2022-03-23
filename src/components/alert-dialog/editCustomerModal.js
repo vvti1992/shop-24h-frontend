@@ -13,11 +13,11 @@ const style = {
     boxShadow: 24,
     p: 4,
 };
-function EditCustomerModal({ openModal, setOpenModal, user}) {
+function EditCustomerModal({ openModal, setOpenModal, user, state, setState}) {
     //Đóng modal
     const handleClose = () => {
         setOpenModal(false);
-        window.location.reload();
+        setState(!state);
     }
     //Hàm gọi API tạo đơn hàng
     const createOrder = async (paramUrl, paramOption = {}) => {

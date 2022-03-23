@@ -18,8 +18,9 @@ function ProductLte() {
     const [noPage, setNoPage] = useState(1);
     const changePage = (event, value) => {
         setPage(value);
-        window.scrollTo(0,0);
+        window.scrollTo(0, 0);
     }
+    const [state, setState] = useState(false);
     useEffect(() => {
         fetchApi("http://localhost:8000/products")
             .then((data) => {
@@ -28,7 +29,7 @@ function ProductLte() {
             }).catch((error) => {
                 console.log(error);
             });
-    }, [page]);
+    }, [page, state]);
     //set state modal
     const [addProductModal, setAddProductModal] = useState(false);
     const [editProductModal, setEditProductModal] = useState(false);
@@ -139,9 +140,16 @@ function ProductLte() {
                     </div>
                 </section>
             </div>
-            <AddProductModal openModal={addProductModal} setOpenModal={setAddProductModal} />
-            <EditProductModal openModal={editProductModal} setOpenModal={setEditProductModal} product={product}/>
-            <DeleteProductModal openAlertModal={deleteProductModal} setOpenAlertModal= {setDeleteProductModal} productId = {productId}/>
+            <AddProductModal openModal={addProductModal} 
+                setOpenModal={setAddProductModal} 
+                state={state} setState = {setState}/>
+            <EditProductModal openModal={editProductModal}
+                setOpenModal={setEditProductModal}
+                product={product} state={state} setState = {setState}/>
+            <DeleteProductModal openAlertModal={deleteProductModal}
+                setOpenAlertModal={setDeleteProductModal}
+                productId={productId}
+                state={state} setState = {setState}/>
         </div>
 
     )

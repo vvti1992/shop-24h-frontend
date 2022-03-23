@@ -3,7 +3,7 @@ import { Container, Row, Col } from "reactstrap";
 import FilterComponent from "./content/FilterComponent";
 import Introduce from "./content/introduce";
 import ProductListComponent from "./content/ProductListComponent";
-function Content() {
+function Content({keySearch}) {
     const [filterReceive, setFilterReceive] = useState({
         minPrice: null,
         maxPrice: null,
@@ -50,6 +50,32 @@ function Content() {
             .catch(console.error());
     }, [filterReceive]);
 
+    useEffect (()=> {
+        var tempArr=[];
+        if(keySearch.trim()!=="")
+        {
+            fetchApi(Url)
+            .then((data) => {
+                data.products.forEach(element => {
+                    if(element.name.toLowerCase().includes(keySearch.toLowerCase())) {
+                        tempArr.push(element);
+                    }
+                });
+                setResponseObj(tempArr);
+            })
+            .catch(console.error());
+        } else
+        {
+            fetchApi(Url)
+            .then((data) => {
+                setResponseObj(data.products);
+                // console.log(data.products);
+            })
+            .catch(console.error());
+            window.scrollTo(0, 0);
+        }
+    }, [keySearch])
+
     // console.log(responseObj);
     // console.log(filter);
     return (
@@ -62,7 +88,11 @@ function Content() {
                     <FilterComponent getFilter={setFilterReceive} />
                 </Col>
                 <Col xs='9'className="col-product">
-                    <ProductListComponent displayProduct={responseObj} />
+                    {
+                        responseObj.length > 0 ?
+                        <ProductListComponent displayProduct={responseObj} /> :
+                        <p className="h4 text-center pt-5">Không tìm thấy danh sách sản phẩm</p>
+                    }
                 </Col>
             </Row>
         </Container>

@@ -417,3 +417,33 @@ table tbody td button:hover {
   position: relative;
   bottom: 0px !important;
 }
+.css-1l9ohcm {
+  max-height: 90%;
+  overflow-y: scroll;
+}
+.table-order {
+  overflow-x: scroll;
+  font-size: small;
+}
+.table-order button{
+
+  font-size: small;
+}
+.table-order tbody tr td:nth-child(9), .table-order thead tr th:nth-child(9) {
+  min-width: 150px;
+}
+.order-filter-form {
+  display: flex;
+  justify-content: flex-end;
+}
+.order-filter-form input {
+  max-width: 180px;
+}
+.hearder-search div,.hearder-search input  {
+  max-height: 40px !important;
+}
+.hearder-search button {
+  border: none;
+  background-color: #acacacfa;
+  color: white;
+}
