@@ -5,7 +5,7 @@ import DeleteProductModal from '../alert-dialog/deleteProductModal';
 import AddProductModal from '../alert-dialog/addProductModal';
 import EditProductModal from '../alert-dialog/editProductModal';
 
-function ProductLte() {
+function ProductLte({search, reset, setReset}) {
     const fetchApi = async (paramUrl, paramOption = {}) => {
         const response = await fetch(paramUrl, paramOption);
         const responseData = await response.json();
@@ -30,6 +30,30 @@ function ProductLte() {
                 console.log(error);
             });
     }, [page, state]);
+    useEffect(()=> {
+        if(search.key !== 0 && search.value !== "") {
+            fetchApi('http://localhost:8000/products?keysearch=' + search.key + "&valuesearch=" + search.value)
+            .then((data) => {
+                setNoPage(Math.ceil(data.products.length / limitRow));
+                setPosts(data.products.slice(page * limitRow - limitRow, page * limitRow));
+            }).catch((error) => {
+                console.log(error);
+            });
+        }
+    }, [search, page, state]);
+    //reset value search
+    useEffect(()=> {
+        if(reset) {
+            fetchApi("http://localhost:8000/products")
+            .then((data) => {
+                setNoPage(Math.ceil(data.products.length / limitRow));
+                setPosts(data.products.slice(page * limitRow - limitRow, page * limitRow));
+            }).catch((error) => {
+                console.log(error);
+            });
+            setReset(false);
+        }
+    }, [reset]);
     //set state modal
     const [addProductModal, setAddProductModal] = useState(false);
     const [editProductModal, setEditProductModal] = useState(false);

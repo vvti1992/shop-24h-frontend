@@ -6,7 +6,7 @@ import AddOrderModal from '../alert-dialog/addOrderModal';
 import ModalAddNewUser from '../alert-dialog/alertModa-addNewUser';
 import EditOrderModal from '../alert-dialog/editOrderModal';
 
-function OrderLte() {
+function OrderLte({search, reset, setReset}) {
     const fetchApi = async (paramUrl, paramOption = {}) => {
         const response = await fetch(paramUrl, paramOption);
         const responseData = await response.json();
@@ -49,7 +49,46 @@ function OrderLte() {
             }).catch((error) => {
                 console.log(error);
             });
-    }, [page, state]);
+    }, []);
+    useEffect(()=> {
+        if(search.key !== 0 && search.value !== "") {
+            var status = -1;
+            if(search.value.toLowerCase() === "xác nhận") {
+                status = 0
+            }
+            else {
+                status = 1;
+            }
+            fetchApi('http://localhost:8000/orders?startdate=' + startDate +"&enddate=" + endDate + '&keysearch=' + search.key + "&valuesearch=" + status)
+            .then((data) => {
+                setNoPage(Math.ceil(data.Order.length / limitRow));
+                setPosts(data.Order.slice(page * limitRow - limitRow, page * limitRow));
+            }).catch((error) => {
+                console.log(error);
+            });
+        } else {
+            fetchApi('http://localhost:8000/orders?startdate=' + startDate +"&enddate=" + endDate)
+            .then((data) => {
+                setNoPage(Math.ceil(data.Order.length / limitRow));
+                setPosts(data.Order.slice(page * limitRow - limitRow, page * limitRow));
+            }).catch((error) => {
+                console.log(error);
+            });
+        }
+    }, [search, page, state]);
+    //reset value search
+    useEffect(() => {
+        if(reset) {
+            fetchApi("http://localhost:8000/orders?startdate=" + startDate +"&enddate=" + endDate)
+            .then((data) => {
+                setNoPage(Math.ceil(data.Order.length / limitRow));
+                setPosts(data.Order.slice(page * limitRow - limitRow, page * limitRow));
+            }).catch((error) => {
+                console.log(error);
+            });
+            setReset(false);
+        }
+    }, [reset]);
     //Add new order
     const AddOrder = () => {
         setAddOrderModal(true);

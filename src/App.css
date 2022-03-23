@@ -441,9 +441,24 @@ table tbody td button:hover {
 }
 .hearder-search div,.hearder-search input  {
   max-height: 40px !important;
+  text-align: center;
 }
-.hearder-search button {
-  border: none;
-  background-color: #acacacfa;
-  color: white;
+.hearder-search {
+  border: 1px solid gray;
+}
+.hearder-search div ul li a{
+  text-decoration: none;
+  color: black;
+}
+.adminlte-header-search li{
+  transform: translate(-80%, 0);
+}
+.MuiSvgIcon-root {
+  position: relative;
+  top:-35px;
+  left: 85%;
+  color: #6c757d;
+}
+.MuiSvgIcon-root:hover {
+  cursor: pointer;
 }

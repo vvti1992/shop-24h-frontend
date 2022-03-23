@@ -4,13 +4,13 @@ import AddCustomerModal from '../alert-dialog/addCustomerModal';
 import EditCustomerModal from '../alert-dialog/editCustomerModal';
 import { Stack, Pagination } from '@mui/material';
 
-function CustomerLte() {
+function CustomerLte({ search, reset, setReset }) {
     const fetchApi = async (paramUrl, paramOption = {}) => {
         const response = await fetch(paramUrl, paramOption);
         const responseData = await response.json();
         return responseData;
     }
-    const [data, setData] = useState([]);
+
     const [user, setUser] = useState({
         fullName: null,
         phoneNumber: null,
@@ -24,7 +24,7 @@ function CustomerLte() {
     const [noPage, setNoPage] = useState(1);
     const changePage = (event, value) => {
         setPage(value);
-        window.scrollTo(0,0);
+        window.scrollTo(0, 0);
     }
     const [state, setState] = useState(false);
     //set open modal
@@ -32,14 +32,38 @@ function CustomerLte() {
     const [openEditModalInfo, setEditOpenModalInfo] = useState(false);
     useEffect(() => {
         fetchApi('http://localhost:8000/customers')
-        .then((data) => {
-            setNoPage(Math.ceil(data.Customers.length / limitRow));
-            setPosts(data.Customers.slice(page * limitRow - limitRow, page * limitRow));
-        }).catch((error) => {
-            console.log(error);
-        });
-}, [page, state]);
-// console.log(posts);
+            .then((data) => {
+                setNoPage(Math.ceil(data.Customers.length / limitRow));
+                setPosts(data.Customers.slice(page * limitRow - limitRow, page * limitRow));
+            }).catch((error) => {
+                console.log(error);
+            });
+    }, [page, state]);
+    useEffect(() => {
+        if (search.key !== 0 && search.value !== "") {
+            fetchApi('http://localhost:8000/customers?keysearch=' + search.key + "&valuesearch=" + search.value)
+                .then((data) => {
+                    setNoPage(Math.ceil(data.Customers.length / limitRow));
+                    setPosts(data.Customers.slice(page * limitRow - limitRow, page * limitRow));
+                }).catch((error) => {
+                    console.log(error);
+                });
+        }
+    }, [search, page, state])
+    //reset
+    useEffect(() => {
+        if (reset) {
+            fetchApi('http://localhost:8000/customers')
+                .then((data) => {
+                    setNoPage(Math.ceil(data.Customers.length / limitRow));
+                    setPosts(data.Customers.slice(page * limitRow - limitRow, page * limitRow));
+                }).catch((error) => {
+                    console.log(error);
+                });
+            setReset(false);
+        }
+    }, [reset])
+    // console.log(posts);
     //Add new user
     const AddUser = () => {
         setAddOpenModalInfo(true);
@@ -119,8 +143,8 @@ function CustomerLte() {
                     </div>
                 </section>
             </div>
-            <AddCustomerModal openModal={openAddModalInfo} setOpenModal={setAddOpenModalInfo} state={state} setState = {setState}/>
-            <EditCustomerModal openModal={openEditModalInfo} setOpenModal={setEditOpenModalInfo} user={user} state={state} setState = {setState}/>
+            <AddCustomerModal openModal={openAddModalInfo} setOpenModal={setAddOpenModalInfo} state={state} setState={setState} />
+            <EditCustomerModal openModal={openEditModalInfo} setOpenModal={setEditOpenModalInfo} user={user} state={state} setState={setState} />
         </div>
 
     )
