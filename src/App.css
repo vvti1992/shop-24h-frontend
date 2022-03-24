@@ -183,6 +183,7 @@ ul.user-info a {
   padding: 10px 5px;
   box-sizing: border-box;
   cursor: pointer;
+  position: relative;
 }
 .card-img, .card-img-top {
   padding: 10px 0px;
@@ -476,8 +477,21 @@ table tbody td button:hover {
   transition: height .5s ease .1s;
   border-radius: 0px 0px 5px 5px;
 }
+.overlay-detail {
+  z-index: 1000 !important;
+  position: absolute !important;
+  /* width: 96% !important; */
+  bottom: 25px !important;
+  left: 5px !important;
+  /* overflow: hidden; */
+  background-color: #dee2e633 !important;
+  width: calc(100% - 10px) !important;
+  height: 40px !important;
+  transition: height .5s ease .1s;
+  border-radius: 0px 0px 5px 5px;
+}
 /* .box-product:hover .overlay {
-  height: 10%;
+  height: 40px;
 } */
 .product-item {
   color: blue;

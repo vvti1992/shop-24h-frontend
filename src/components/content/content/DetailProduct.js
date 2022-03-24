@@ -92,6 +92,16 @@ function DetailProduct({ id }) {
         setOpenModelNotify(true);
         setMessageModal("Sản phẩm đã được thêm vào giỏ hàng thành công!");
     }
+    const buyMoreProduct = (value) =>{
+        productObject = {
+            number: 1,
+            product: value
+        }
+        dispatch(updateNumber(productObject));
+        dispatch(addProduct(productObject));
+        setOpenModelNotify(true);
+        setMessageModal("Sản phẩm đã được thêm vào giỏ hàng thành công!");
+    }
   
     const navigate = useNavigate();
     const HandleDetailClick = (data) => {
@@ -134,8 +144,8 @@ function DetailProduct({ id }) {
                     <h5 className="text-center text-bold">THAM KHẢO SẢN PHẨM KHÁC</h5>
                     {
                         relativeProduct.map((element, index) => (
-                            <div key={index} className="box-product-detail" onClick={() =>HandleDetailClick(element)}>
-                                <Card>
+                            <div key={index} className="box-product-detail">
+                                <Card onClick={() =>HandleDetailClick(element)}>
                                     <CardImg
                                         alt="Image.jpg"
                                         src={element.imageUrl}
@@ -157,7 +167,14 @@ function DetailProduct({ id }) {
                                         </CardText>
                                     </CardBody>
                                 </Card>
-
+                                <div className="overlay-detail">
+                                    <div style={{ float: "left" }} className="product-item" onClick={()=>buyMoreProduct(element)}>
+                                        <i class="fa-solid fa-cart-shopping" ></i>
+                                    </div>
+                                    <div style={{ float: "right" }} className="product-item" onClick={() => HandleDetailClick(element)}>
+                                        <i class="fas fa-info-circle"></i>
+                                    </div>
+                                </div>
                             </div>
                         ))
                     }
