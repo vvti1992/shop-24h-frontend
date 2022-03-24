@@ -174,6 +174,7 @@ ul.user-info a {
   padding: 10px 5px;
   box-sizing: border-box;
   cursor: pointer;
+  position: relative;
 }
 .box-product-detail {
   width: 20%;
@@ -453,12 +454,36 @@ table tbody td button:hover {
 .adminlte-header-search li{
   transform: translate(-80%, 0);
 }
-.MuiSvgIcon-root {
+.mui-icon-refresh {
   position: relative;
   top:-35px;
   left: 85%;
   color: #6c757d;
 }
-.MuiSvgIcon-root:hover {
+.mui-icon-refresh:hover {
   cursor: pointer;
+}
+.overlay {
+  z-index: 1000 !important;
+  position: absolute !important;
+  /* width: 96% !important; */
+  bottom: 25px !important;
+  left: 5px !important;
+  /* overflow: hidden; */
+  background-color: #dee2e633 !important;
+  width: calc(100% - 10px) !important;
+  height: 40px !important;
+  transition: height .5s ease .1s;
+  border-radius: 0px 0px 5px 5px;
+}
+/* .box-product:hover .overlay {
+  height: 10%;
+} */
+.product-item {
+  color: blue;
+  padding: 10px;
+};
+.fa-cart-shopping, .fa-info-circle:hover {
+  font-size: 30px;
+  color: red;
 }

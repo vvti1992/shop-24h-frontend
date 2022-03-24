@@ -76,8 +76,6 @@ function Content({keySearch}) {
         }
     }, [keySearch])
 
-    // console.log(responseObj);
-    // console.log(filter);
     return (
         <Container className="bg-light">
             <Row>
@@ -90,7 +88,10 @@ function Content({keySearch}) {
                 <Col xs='9'className="col-product">
                     {
                         responseObj.length > 0 ?
-                        <ProductListComponent displayProduct={responseObj} /> :
+                        <>
+                        {keySearch !== "" ? <p className="pt-5">{`Tìm thấy ${responseObj.length} sản phẩm tương ứng.`}</p> : ""}
+                        <ProductListComponent displayProduct={responseObj} />
+                        </> :
                         <p className="h4 text-center pt-5">Không tìm thấy danh sách sản phẩm</p>
                     }
                 </Col>

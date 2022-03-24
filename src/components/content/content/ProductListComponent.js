@@ -27,8 +27,8 @@ function ProductListComponent({ displayProduct }) {
                     <h4 className="text-center py-4">DANH SÁCH SẢN PHẨM</h4> <hr />
                     {
                         posts.map((element, index) => (
-                            <div key={index} className="box-product" onClick={() =>HandleDetailClick(element)}>
-                                <Card>
+                            <div key={index} className="box-product" >
+                                <Card onClick={() => HandleDetailClick(element)}>
                                     <CardImg
                                         alt="Image.jpg"
                                         src={element.imageUrl}
@@ -49,7 +49,16 @@ function ProductListComponent({ displayProduct }) {
                                             {element.promotionPrice.toLocaleString()} VNĐ
                                         </CardText>
                                     </CardBody>
+
                                 </Card>
+                                <div className="overlay">
+                                    <div style={{ float: "left" }} className="product-item">
+                                        <i class="fa-solid fa-cart-shopping" ></i>
+                                    </div>
+                                    <div style={{ float: "right" }} className="product-item" onClick={() => HandleDetailClick(element)}>
+                                        <i class="fas fa-info-circle"></i>
+                                    </div>
+                                </div>
                             </div>
                         ))
                     }

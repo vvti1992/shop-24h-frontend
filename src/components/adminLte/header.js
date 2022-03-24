@@ -3,6 +3,7 @@ import { FormControl, InputLabel, Select, MenuItem, NativeSelect, styled, InputB
 import ModalAddNewUser from "../alert-dialog/alertModa-addNewUser";
 import RefreshIcon from '@mui/icons-material/Refresh';
 import {UncontrolledTooltip} from 'reactstrap';
+import { useNavigate } from "react-router-dom";
 
 const BootstrapInput = styled(InputBase)(({ theme }) => ({
   'label + &': {
@@ -37,8 +38,9 @@ const BootstrapInput = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-function HeaderLte({ mode, setSearchCustomer, setSearchProduct, setSearchOrder, setReset }) {
+function HeaderLte({ mode, setSearchCustomer, setSearchProduct, setSearchOrder }) {
 
+  const navigate = useNavigate();
   const [value, setValue] = useState(0);
   const [inputValue, setInputValue] = useState("");
 
@@ -49,12 +51,6 @@ function HeaderLte({ mode, setSearchCustomer, setSearchProduct, setSearchOrder, 
   const handleChange = (event) => {
     setValue(event.target.value);
   };
-  //API
-  const fetchApi = async (paramUrl, paramOption = {}) => {
-    const response = await fetch(paramUrl, paramOption);
-    const responseData = await response.json();
-    return responseData;
-  }
   //clear dữ liệu tìm kiếm khi thay đổi trạng thái
   useEffect(() => {
     setValue(0);
@@ -95,9 +91,30 @@ function HeaderLte({ mode, setSearchCustomer, setSearchProduct, setSearchOrder, 
   }
   //Khi nhấn nút làm mới dữ liệu
   const handleFreshData = () => {
-    setReset(true);
     setValue(0);
     setInputValue("");
+    if (mode == 0) {
+      setSearchCustomer({
+        key: 0,
+        value: ""
+      })
+    }
+    if (mode == 1) {
+      setSearchProduct({
+        key: 0,
+        value: ""
+      })
+    }
+    if (mode == 2) {
+      setSearchOrder({
+        key: 0,
+        value: ""
+      })
+    }
+  }
+  //log out function 
+  const logOut = () => {
+    navigate("/");
   }
   return (
     <>
@@ -161,12 +178,12 @@ function HeaderLte({ mode, setSearchCustomer, setSearchProduct, setSearchOrder, 
               </FormControl>
               <FormControl variant="standard">
                 <BootstrapInput id="demo-customized-textbox" onKeyPress={handleSearch} onChange={(e) => setInputValue(e.target.value)} value={inputValue} />
-                <RefreshIcon id="UncontrolledTooltipExample" onClick={handleFreshData}/>
+                <RefreshIcon id="UncontrolledTooltipExample" onClick={handleFreshData} className='mui-icon-refresh'/>
                 <UncontrolledTooltip
                   placement="right"
                   target="UncontrolledTooltipExample"
                 >
-                  Refresh!
+                  Refresh
                 </UncontrolledTooltip>
               </FormControl>
             </li>
@@ -252,9 +269,15 @@ function HeaderLte({ mode, setSearchCustomer, setSearchProduct, setSearchOrder, 
                 <i className="fas fa-expand-arrows-alt" />
               </a>
             </li>
-            <li className="nav-item">
+            <li className="nav-item" onClick={logOut}>
               <a className="nav-link" data-widget="control-sidebar" data-controlsidebar-slide="true" role="button">
-                <i className="fas fa-th-large" />
+              <i class="fa-solid fa-arrow-right-from-bracket" id="admin-lte-log-out"/>
+              <UncontrolledTooltip
+                  placement="right"
+                  target="admin-lte-log-out"
+                >
+                  Log out
+                </UncontrolledTooltip>
               </a>
             </li>
           </ul>

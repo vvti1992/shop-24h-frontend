@@ -8,7 +8,6 @@ import ProductLte from "./adminLte/product";
 
 function AdminLtePage() {
     const [state, setState] = useState(0);
-    const [reset, setReset] = useState(false);
     const [searchCustomer, setSearchCustomer] = useState ({
         key: "",
         value: ""
@@ -52,20 +51,20 @@ function AdminLtePage() {
               value: ""
             });
           }
-      }, [state])
+      }, [state]);
     return (
         <div className='wrapper'>
             <HeaderLte mode={state} setSearchCustomer = {setSearchCustomer} 
                         setSearchProduct= {setSearchProduct} 
                         setSearchOrder = {setSearchOrder}
-                        setReset = {setReset} />
+                      />
             <MenuLte state={state} setState={setState}/>
             {state === 0 ? 
-                <CustomerLte search= {searchCustomer} reset= {reset} setReset = {setReset}/>
+                <CustomerLte search= {searchCustomer} />
                 : state === 1 ? 
-                <ProductLte search= {searchProduct} reset= {reset} setReset = {setReset}/>
+                <ProductLte search= {searchProduct} />
                 : 
-                <OrderLte search= {searchOrder} reset= {reset} setReset = {setReset}/>}
+                <OrderLte search= {searchOrder} />}
             {/* <FooterLte/> */}
         </div>
     )

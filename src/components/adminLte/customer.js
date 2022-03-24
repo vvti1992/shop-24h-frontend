@@ -21,6 +21,7 @@ function CustomerLte({ search, reset, setReset }) {
     const limitRow = 10; //10 dòng cho mỗi trang
     const [page, setPage] = useState(1);
     const [posts, setPosts] = useState([]);
+    const [totalCustomer, setTotalCustomer] = useState([]);
     const [noPage, setNoPage] = useState(1);
     const changePage = (event, value) => {
         setPage(value);
@@ -30,40 +31,30 @@ function CustomerLte({ search, reset, setReset }) {
     //set open modal
     const [openAddModalInfo, setAddOpenModalInfo] = useState(false);
     const [openEditModalInfo, setEditOpenModalInfo] = useState(false);
+
     useEffect(() => {
-        fetchApi('http://localhost:8000/customers')
+        setPage(1);
+        setNoPage(1);
+        fetchApi('http://localhost:8000/customers?keysearch=' + search.key + "&valuesearch=" + search.value)
             .then((data) => {
+                setTotalCustomer(data.Customers);
                 setNoPage(Math.ceil(data.Customers.length / limitRow));
                 setPosts(data.Customers.slice(page * limitRow - limitRow, page * limitRow));
             }).catch((error) => {
                 console.log(error);
             });
-    }, [page, state]);
+    }, [search, page, state]);
     useEffect(() => {
-        if (search.key !== 0 && search.value !== "") {
-            fetchApi('http://localhost:8000/customers?keysearch=' + search.key + "&valuesearch=" + search.value)
-                .then((data) => {
-                    setNoPage(Math.ceil(data.Customers.length / limitRow));
-                    setPosts(data.Customers.slice(page * limitRow - limitRow, page * limitRow));
-                }).catch((error) => {
-                    console.log(error);
-                });
-        }
-    }, [search, page, state])
-    //reset
-    useEffect(() => {
-        if (reset) {
-            fetchApi('http://localhost:8000/customers')
-                .then((data) => {
-                    setNoPage(Math.ceil(data.Customers.length / limitRow));
-                    setPosts(data.Customers.slice(page * limitRow - limitRow, page * limitRow));
-                }).catch((error) => {
-                    console.log(error);
-                });
-            setReset(false);
-        }
-    }, [reset])
-    // console.log(posts);
+        fetchApi('http://localhost:8000/customers?keysearch=' + search.key + "&valuesearch=" + search.value)
+            .then((data) => {
+                setTotalCustomer(data.Customers);
+                setNoPage(Math.ceil(data.Customers.length / limitRow));
+                setPosts(data.Customers.slice(page * limitRow - limitRow, page * limitRow));
+            }).catch((error) => {
+                console.log(error);
+            });
+    }, [page]);
+    console.log(search);
     //Add new user
     const AddUser = () => {
         setAddOpenModalInfo(true);
@@ -89,7 +80,10 @@ function CustomerLte({ search, reset, setReset }) {
                 <section className="content">
                     <div className="container-fluid">
                         <div className="row">
-                            <Table hover className='text-center'>
+                            {
+                                posts.length > 0 ? <>
+                                {search.key !== 0 && search.key !== "" ? <p>{`Tìm thấy ${totalCustomer.length} khách hàng tương ứng.`}</p> : ""}
+                                <Table hover className='text-center'>
                                 <thead className='bg-primary'>
                                     <tr>
                                         <th>
@@ -138,7 +132,13 @@ function CustomerLte({ search, reset, setReset }) {
                                     ))}
                                 </tbody>
                             </Table>
-                            <Pagination count={noPage} color="primary" defaultPage={page} onChange={changePage} />
+                            <Pagination count={noPage} color="primary" page={page} onChange={changePage} />
+                            </> : 
+                            <div>
+                            <p className='text-center'>{`Không tìm thấy đơn hàng có ${search.key === "10" ? "họ tên" : search.key === "20" ?
+                                "số điện thoại" : "email"} là: '${search.value}'`}</p>
+                        </div>
+                            }
                         </div>
                     </div>
                 </section>
