@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
-import { Table } from 'react-bootstrap';
+import { Table, Row } from 'react-bootstrap';
 import AddCustomerModal from '../alert-dialog/addCustomerModal';
 import EditCustomerModal from '../alert-dialog/editCustomerModal';
 import { Stack, Pagination } from '@mui/material';
+import { Col } from 'reactstrap';
 
 function CustomerLte({ search, reset, setReset }) {
     const fetchApi = async (paramUrl, paramOption = {}) => {
@@ -71,9 +72,14 @@ function CustomerLte({ search, reset, setReset }) {
                 <div className="content-header">
                     <div className="container-fluid">
                         <div className="row mb-2">
-                            <div className="col-sm-6">
+                            <Row>
+                                <div className='col-12 col-sm-12 col-md-10 col-lg-10'>
                                 <h1 className="m-0">Danh sách thông tin khách hàng</h1>
-                            </div>
+                                </div>
+                                <div className='col-12 col-sm-12 col-md-2 col-lg-2'>
+                                <button onClick={AddUser} className="btn btn-info mr-2 w-100"><i class="fa-solid fa-plus"></i>Thêm khách hàng</button>
+                                </div>
+                            </Row>
                         </div>
                     </div>
                 </div>
@@ -82,62 +88,65 @@ function CustomerLte({ search, reset, setReset }) {
                         <div className="row">
                             {
                                 posts.length > 0 ? <>
-                                {search.key !== 0 && search.key !== "" ? <p>{`Tìm thấy ${totalCustomer.length} khách hàng tương ứng.`}</p> : ""}
-                                <Table hover className='text-center'>
-                                <thead className='bg-primary'>
-                                    <tr>
-                                        <th>
-                                            STT
-                                        </th>
-                                        <th>
-                                            Họ và tên
-                                        </th>
-                                        <th>
-                                            Số điện thoại
-                                        </th>
-                                        <th>
-                                            Email
-                                        </th>
-                                        <th>
-                                            Địa chỉ
-                                        </th>
-                                        <th>
-                                            Cập nhật
-                                        </th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {posts.map((element, index) => (
-                                        <tr key={index}>
-                                            <td>
-                                                {index + 1}
-                                            </td>
-                                            <td>
-                                                {element.fullName}
-                                            </td>
-                                            <td>
-                                                {element.phoneNumber}
-                                            </td>
-                                            <td>
-                                                {element.email}
-                                            </td>
-                                            <td>
-                                                {element.address}
-                                            </td>
-                                            <td>
-                                                <button onClick={AddUser} className="btn btn-info mr-2">Thêm</button>
-                                                <button onClick={() => EditUser(element)} className="btn btn-warning">Sửa</button>
-                                            </td>
-                                        </tr>
-                                    ))}
-                                </tbody>
-                            </Table>
-                            <Pagination count={noPage} color="primary" page={page} onChange={changePage} />
-                            </> : 
-                            <div>
-                            <p className='text-center'>{`Không tìm thấy đơn hàng có ${search.key === "10" ? "họ tên" : search.key === "20" ?
-                                "số điện thoại" : "email"} là: '${search.value}'`}</p>
-                        </div>
+                                    {search.key !== 0 && search.key !== "" ? <p>{`Tìm thấy ${totalCustomer.length} khách hàng tương ứng.`}</p> : ""}
+                                    <Col className='col-12 col-sm-12 col-md-12 col-lg-12'>
+                                        <div className='table-responsive'>
+                                            <Table hover className='text-center table-customer'>
+                                                <thead className='bg-primary'>
+                                                    <tr>
+                                                        <th>
+                                                            STT
+                                                        </th>
+                                                        <th>
+                                                            Họ và tên
+                                                        </th>
+                                                        <th>
+                                                            Số điện thoại
+                                                        </th>
+                                                        <th>
+                                                            Email
+                                                        </th>
+                                                        <th>
+                                                            Địa chỉ
+                                                        </th>
+                                                        <th>
+                                                            Cập nhật
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    {posts.map((element, index) => (
+                                                        <tr key={index}>
+                                                            <td>
+                                                                {index + 1}
+                                                            </td>
+                                                            <td>
+                                                                {element.fullName}
+                                                            </td>
+                                                            <td>
+                                                                {element.phoneNumber}
+                                                            </td>
+                                                            <td>
+                                                                {element.email}
+                                                            </td>
+                                                            <td>
+                                                                {element.address}
+                                                            </td>
+                                                            <td>
+                                                                <button onClick={() => EditUser(element)} className="btn btn-danger w-75">Sửa</button>
+                                                            </td>
+                                                        </tr>
+                                                    ))}
+                                                </tbody>
+                                            </Table>
+                                        </div>
+                                        <Pagination count={noPage} color="primary" page={page} onChange={changePage} />
+                                    </Col>
+                                </> :
+                                    <div className='col-12 col-sm-12 col-md-12 col-lg-12'>
+                                        <p className='text-center'>{`Không tìm thấy đơn hàng có ${search.key === "10" ? "họ tên" : search.key === "20" ?
+                                            "số điện thoại" : "email"} là: '${search.value}'`}</p>
+                                    </div>
                             }
                         </div>
                     </div>

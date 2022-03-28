@@ -64,6 +64,7 @@ function ViewOrder() {
                 <Row>
                     <Col xs='12'>
                         <p className="h3">Thông tin đơn hàng của bạn: </p>
+                        <div className="table-responsive">
                         <Table className="table-product table table-inverse table-bordered overflow-scroll table-hover text-center"
                         >
                             <thead className='thead-inverse bg-primary text-white'>
@@ -111,6 +112,7 @@ function ViewOrder() {
                                 }
                             </tbody>
                         </Table>
+                        </div>
 
                     </Col>
                 </Row>

@@ -29,7 +29,7 @@ function FilterComponent({getFilter}) {
     }, [filter]);
     return (
         <div className="form-filter py-4">
-            <div className="py-4">
+            <div className="py-1">
                 <h4>Danh mục sản phẩm</h4>
                 <ul>
                     <li>Smartphone</li>
@@ -38,7 +38,7 @@ function FilterComponent({getFilter}) {
                     <li>Tai nghe</li>
                 </ul>
             </div>
-            <div className="py-4">
+            <div className="py-1">
                 <p>Lọc theo giá sản phẩm: </p>
                 <Row className="h6">
                     <Col xs='6'>
@@ -49,7 +49,7 @@ function FilterComponent({getFilter}) {
                     </Col>
                 </Row>
             </div>
-            <div className="py-4">
+            <div className="py-1">
                 <p>Lọc theo tên sản phẩm: </p>
                 <div className="pl-2">
                 <Label><Input type="checkbox" name="checkbox" defaultChecked={filter.apple} onChange={()=>setFilter({...filter, apple: !filter.apple})}/> Apple</Label><br/>
@@ -60,7 +60,7 @@ function FilterComponent({getFilter}) {
                 </div>
                 
             </div>
-            <div className="py-4">
+            <div className="py-1">
                 <p>Lọc theo hệ điều hành: </p>
                 <div className="pl-2">
                 <Label><Input type="checkbox" name="checkbox" defaultChecked={filter.ios} onChange={()=>setFilter({...filter,ios: !filter.ios})}/> IOS</Label><br/>

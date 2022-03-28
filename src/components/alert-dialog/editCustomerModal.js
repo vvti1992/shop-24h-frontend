@@ -7,7 +7,8 @@ const style = {
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    width: 800,
+    maxWidth: 800,
+    minWidth: "60%",
     bgcolor: 'background.paper',
     border: '2px solid #000',
     boxShadow: 24,
@@ -120,7 +121,7 @@ function EditCustomerModal({ openModal, setOpenModal, user, state, setState}) {
     }
 
     return (
-        <div>
+        <div className='col-12 col-sm-12 col-md-12 col-lg-12'>
             <Modal
                 open={openModal}
                 onClose={handleClose}
@@ -133,7 +134,7 @@ function EditCustomerModal({ openModal, setOpenModal, user, state, setState}) {
                     </ModalHeader>
                     <ModalBody>
                         <Row>
-                            <Col xs='6'>
+                            <Col className='col-12 col-sm-12 col-md-6 col-lg-6'>
                                 <TextField className='my-2'
                                     error
                                     id="outlined-error-helper-text"
@@ -145,7 +146,7 @@ function EditCustomerModal({ openModal, setOpenModal, user, state, setState}) {
                                     defaultValue={user.fullName}
                                 />
                             </Col>
-                            <Col xs='6'>
+                            <Col className='col-12 col-sm-12 col-md-6 col-lg-6'>
                                 <TextField className='my-2'
                                     error
                                     id="outlined-error-helper-text"
@@ -158,7 +159,7 @@ function EditCustomerModal({ openModal, setOpenModal, user, state, setState}) {
                                     defaultValue={user.phoneNumber}
                                 />
                             </Col>
-                            <Col xs='6'>
+                            <Col className='col-12 col-sm-12 col-md-6 col-lg-6'>
                                 <TextField className='my-2'
                                     error
                                     id="outlined-error-helper-text"
@@ -171,7 +172,7 @@ function EditCustomerModal({ openModal, setOpenModal, user, state, setState}) {
                                     defaultValue={user.email}
                                 />
                             </Col>
-                            <Col xs='6'>
+                            <Col className='col-12 col-sm-12 col-md-6 col-lg-6'>
                                 <TextField className='my-2'
                                     error
                                     id="outlined-error-helper-text"
@@ -183,7 +184,7 @@ function EditCustomerModal({ openModal, setOpenModal, user, state, setState}) {
                                     defaultValue={user.address}
                                 />
                             </Col>
-                            <Col xs='6'>
+                            <Col className='col-12 col-sm-12 col-md-6 col-lg-6'>
                                 <TextField className='my-2'
                                     error
                                     id="outlined-error-helper-text"
@@ -196,7 +197,7 @@ function EditCustomerModal({ openModal, setOpenModal, user, state, setState}) {
                                     defaultValue={user.password}
                                 />
                             </Col>
-                            <Col xs='6'>
+                            <Col className='col-12 col-sm-12 col-md-6 col-lg-6'>
                                 <TextField className='my-2'
                                     error
                                     id="outlined-error-helper-text"

@@ -1,12 +1,10 @@
 import { Col } from "reactstrap";
-import Logo from "../../header/logo/logo";
+import logo from '../../../assets/images/800px-Youtube.png'
 function Social() {
     return (
-        <Col sm='3' className=''>
+        <Col className="col-6 col-md-3 col-sm-6 col-lg-3">
             <div className="footer-logo">
-                <Logo />
-            </div>
-            <div>
+            <img className='pb-3' src={logo} alt="logo.png" width='50%'/>
                 <ul className='footer-icon'>
                     <li>
                         <i className="fa-brands fa-facebook-square"></i>

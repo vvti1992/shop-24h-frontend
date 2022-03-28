@@ -7,7 +7,8 @@ const style = {
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    width: 800,
+    maxWidth: 800,
+    minWidth: "60%",
     bgcolor: 'background.paper',
     border: '2px solid #000',
     boxShadow: 24,
@@ -78,7 +79,7 @@ function EditOrderModal({ openModal, setOpenModal, order, state, setState}) {
     }
 
     return (
-        <div>
+        <div className='col-12 col-sm-12 col-md-12 col-lg-12'>
             <Modal
                 open={openModal}
                 onClose={handleClose}
@@ -91,7 +92,7 @@ function EditOrderModal({ openModal, setOpenModal, order, state, setState}) {
                     </ModalHeader>
                     <ModalBody>
                         <Row className='my-3'>
-                            <Col xs='6'>
+                            <Col className='col-12 col-sm-12 col-md-6 col-lg-6'>
                                 <TextField
                                     id="outlined-select-currency"
                                     select
@@ -107,7 +108,7 @@ function EditOrderModal({ openModal, setOpenModal, order, state, setState}) {
                                 </TextField>
 
                             </Col>
-                            <Col xs='6'>
+                            <Col className='col-12 col-sm-12 col-md-6 col-lg-6'>
                                 <TextField
                                     id="filled-search"
                                     label="Ghi chú"
@@ -120,7 +121,7 @@ function EditOrderModal({ openModal, setOpenModal, order, state, setState}) {
                             </Col>
                         </Row>
                         <Row className='my-3'>
-                            <Col xs='6'>
+                            <Col className='col-12 col-sm-12 col-md-6 col-lg-6'>
                             <TextField
                                     id="outlined-select-currency"
                                     label="Mã khách hàng"
@@ -130,7 +131,7 @@ function EditOrderModal({ openModal, setOpenModal, order, state, setState}) {
                                 >
                         </TextField>
                             </Col>
-                            <Col xs='6'>
+                            <Col className='col-12 col-sm-12 col-md-6 col-lg-6'>
                                 <TextField
                                     id="filled-search"
                                     type="text"

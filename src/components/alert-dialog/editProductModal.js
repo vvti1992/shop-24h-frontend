@@ -7,7 +7,8 @@ const style = {
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    width: 800,
+    maxWidth: 800,
+    minWidth: "60%",
     bgcolor: 'background.paper',
     border: '2px solid #000',
     boxShadow: 24,
@@ -121,7 +122,7 @@ function EditProductModal({ openModal, setOpenModal, product, state, setState}) 
     }
 
     return (
-        <div>
+        <div className='col-12 col-sm-12 col-md-12 col-lg-12'>
             <Modal
                 open={openModal}
                 onClose={handleClose}
@@ -134,39 +135,39 @@ function EditProductModal({ openModal, setOpenModal, product, state, setState}) 
                     </ModalHeader>
                     <ModalBody>
                         <Row className='my-2'>
-                            <Col xs='6'>
+                            <Col className='col-12 col-sm-12 col-md-6 col-lg-6'>
                                 <TextField id="standard-basic" label="Tên sản phẩm" variant="standard" fullWidth required
                                     onChange={(e) => setName(e.target.value)} defaultValue={product.name}
                                 />
                             </Col>
-                            <Col xs='6'>
+                            <Col className='col-12 col-sm-12 col-md-6 col-lg-6'>
                                 <TextField id="standard-basic" label="Nhà sản xuất" variant="standard" fullWidth required
                                     onChange={(e) => setBrand(e.target.value)} defaultValue={product.brand}
                                 />
                             </Col>
                         </Row>
                         <Row className='my-2'>
-                            <Col xs='6'>
+                            <Col className='col-12 col-sm-12 col-md-6 col-lg-6'>
                                 <TextField id="standard-basic" label="Hệ điều hành" variant="standard" fullWidth
                                     onChange={(e) => setType(e.target.value)} required defaultValue={product.type}/> 
                             </Col>
-                            <Col xs='6'>
+                            <Col className='col-12 col-sm-12 col-md-6 col-lg-6'>
                                 <TextField id="standard-basic" label="Năm sản xuất" variant="standard"
                                     fullWidth required />
                             </Col>
                         </Row>
                         <Row className='my-2'>
-                            <Col xs='6'>
+                            <Col className='col-12 col-sm-12 col-md-6 col-lg-6'>
                                 <TextField id="standard-basic" label="Giá gốc" variant="standard" type='number'
                                     onChange={(e) => setBuyPrice(e.target.value)} fullWidth required defaultValue={product.buyPrice}/>
                             </Col>
-                            <Col xs='6'>
+                            <Col className='col-12 col-sm-12 col-md-6 col-lg-6'>
                                 <TextField id="standard-basic" label="Giá khuyến mãi" variant="standard" type='number'
                                     onChange={(e) => setPromotionPrice(e.target.value)} fullWidth required defaultValue={product.promotionPrice}/>
                             </Col>
                         </Row>
                         <Row className='my-2'>
-                            <Col xs='12'>
+                            <Col className='col-12 col-sm-12 col-md-12 col-lg-12'>
                                 <TextField
                                     id="standard-textarea"
                                     label="Mô tả sản phẩm"
@@ -179,7 +180,7 @@ function EditProductModal({ openModal, setOpenModal, product, state, setState}) 
                                 />
                             </Col>
                         </Row>
-                        <Row className='my-2'>
+                        <Row className='col-12 col-sm-12 col-md-12 col-lg-12'>
                             <Col xs='12'>
                                 <TextField
                                     id="standard-textarea"
@@ -194,7 +195,7 @@ function EditProductModal({ openModal, setOpenModal, product, state, setState}) 
                             </Col>
                         </Row>
                         <Row className='my-2'>
-                            <Col xs='12'>
+                            <Col className='col-12 col-sm-12 col-md-12 col-lg-12'>
                                 <TextField
                                     id="standard-textarea"
                                     label="Url hình ảnh 2"
@@ -206,7 +207,7 @@ function EditProductModal({ openModal, setOpenModal, product, state, setState}) 
                             </Col>
                         </Row>
                         <Row className='my-2'>
-                            <Col xs='12'>
+                            <Col className='col-12 col-sm-12 col-md-12 col-lg-12'>
                                 <TextField
                                     id="standard-textarea"
                                     label="Url hình ảnh 3"
@@ -218,7 +219,7 @@ function EditProductModal({ openModal, setOpenModal, product, state, setState}) 
                             </Col>
                         </Row>
                         <Row className='my-2'>
-                            <Col xs='12'>
+                            <Col className='col-12 col-sm-12 col-md-12 col-lg-12'>
                                 <TextField
                                     id="standard-textarea"
                                     label="Url hình ảnh 4"
@@ -230,7 +231,7 @@ function EditProductModal({ openModal, setOpenModal, product, state, setState}) 
                             </Col>
                         </Row>
                         <Row className='my-2'>
-                            <Col xs='12'>
+                            <Col className='col-12 col-sm-12 col-md-12 col-lg-12'>
                                 <TextField
                                     id="standard-textarea"
                                     label="Url hình ảnh 5"

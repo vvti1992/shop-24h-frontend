@@ -80,8 +80,11 @@ function ProductLte({ search }) {
                 <div className="content-header">
                     <div className="container-fluid">
                         <div className="row mb-2">
-                            <div className="col-sm-6">
+                            <div className="col-sm-12 col-md-10 col-lg-10 col-12">
                                 <h1 className="m-0">Danh sách thông tin sản phẩm</h1>
+                            </div>
+                            <div className="col-sm-12 col-md-2 col-lg-2 col-12">
+                                <button onClick={AddProduct} className="btn btn-info w-100"><i class="fa-solid fa-plus"></i>Thêm sản phẩm</button>
                             </div>
                         </div>
                     </div>
@@ -146,7 +149,7 @@ function ProductLte({ search }) {
                                                         {element.promotionPrice.toLocaleString()}
                                                     </td>
                                                     <td>
-                                                        <button onClick={AddProduct} className="btn btn-info">Thêm</button>
+
                                                         <button onClick={() => EditProduct(element)} className="btn btn-warning ml-2">Sửa</button>
                                                         <button onClick={() => DeleteProduct(element)} className="btn btn-danger ml-2">Xóa</button>
                                                     </td>

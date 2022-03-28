@@ -7,7 +7,8 @@ const style = {
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    width: 800,
+    maxWidth: 800,
+    minWidth: "60%",
     bgcolor: 'background.paper',
     border: '2px solid #000',
     boxShadow: 24,
@@ -120,7 +121,7 @@ function AddCustomerModal({ openModal, setOpenModal, state, setState }) {
     }
 
     return (
-        <div>
+        <div className='col-12 col-sm-12 col-md-12 col-lg-12'>
             <Modal
                 open={openModal}
                 onClose={handleClose}
@@ -133,8 +134,8 @@ function AddCustomerModal({ openModal, setOpenModal, state, setState }) {
                     </ModalHeader>
                     <ModalBody>
                         <Row>
-                            <Col xs='6'>
-                                <TextField className='my-2'
+                            <Col className='col-12 col-sm-12 col-md-6 col-lg-6'>
+                                <TextField className='my-3'
                                     error
                                     id="outlined-error-helper-text"
                                     label="Họ và tên"
@@ -144,8 +145,8 @@ function AddCustomerModal({ openModal, setOpenModal, state, setState }) {
                                     onChange={(e) => setName(e.target.value)}
                                 />
                             </Col>
-                            <Col xs='6'>
-                                <TextField className='my-2'
+                            <Col className='col-12 col-sm-12 col-md-6 col-lg-6'>
+                                <TextField className='my-3'
                                     error
                                     id="outlined-error-helper-text"
                                     label="Số điện thoại"
@@ -156,8 +157,8 @@ function AddCustomerModal({ openModal, setOpenModal, state, setState }) {
                                     onChange={(e) => setPhone(e.target.value)}
                                 />
                             </Col>
-                            <Col xs='6'>
-                                <TextField className='my-2'
+                            <Col className='col-12 col-sm-12 col-md-6 col-lg-6'>
+                                <TextField className='my-3'
                                     error
                                     id="outlined-error-helper-text"
                                     label="Email"
@@ -168,8 +169,8 @@ function AddCustomerModal({ openModal, setOpenModal, state, setState }) {
                                     onChange={(e) => setEmail(e.target.value)}
                                 />
                             </Col>
-                            <Col xs='6'>
-                                <TextField className='my-2'
+                            <Col className='col-12 col-sm-12 col-md-6 col-lg-6'>
+                                <TextField className='my-3'
                                     error
                                     id="outlined-error-helper-text"
                                     label="Địa chỉ"
@@ -179,8 +180,8 @@ function AddCustomerModal({ openModal, setOpenModal, state, setState }) {
                                     onChange={(e) => setAddress(e.target.value)}
                                 />
                             </Col>
-                            <Col xs='6'>
-                                <TextField className='my-2'
+                            <Col className='col-12 col-sm-12 col-md-6 col-lg-6'>
+                                <TextField className='my-3'
                                     error
                                     id="outlined-error-helper-text"
                                     label="Mật khẩu"
@@ -191,8 +192,8 @@ function AddCustomerModal({ openModal, setOpenModal, state, setState }) {
                                     onChange={(e) => setPassword(e.target.value)}
                                 />
                             </Col>
-                            <Col xs='6'>
-                                <TextField className='my-2'
+                            <Col className='col-12 col-sm-12 col-md-6 col-lg-6'>
+                                <TextField className='my-3'
                                     error
                                     id="outlined-error-helper-text"
                                     label="Xác nhận mật khẩu"

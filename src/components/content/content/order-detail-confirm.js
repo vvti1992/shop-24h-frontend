@@ -161,9 +161,9 @@ function OrderDetailConfirm() {
             <Container>
                 {product.length > 0 ?
                     <Row>
-                        <Col xs='8'>
-
-                            <Table className=" order-table table table-inverse table-bordered overflow-scroll table-hover"
+                        <Col className="col-12 col-sm-12 col-md-12 col-lg-8">
+                        <div className="table-responsive">
+                        <Table className=" order-table table table-inverse table-bordered overflow-scroll table-hover"
                             >
                                 <thead className='thead-inverse bg-primary text-white'>
                                     <tr>
@@ -214,8 +214,10 @@ function OrderDetailConfirm() {
                                     }
                                 </tbody>
                             </Table>
+                        </div>
+                            
                         </Col>
-                        <Col xs='4'>
+                        <Col className="col-12 col-sm-12 col-md-12 col-lg-4">
                             <div className='sum-money'>
                                 <h6>Thông tin khách hàng:</h6>
                                 <Row className="form-group py-1">

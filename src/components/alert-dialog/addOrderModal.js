@@ -7,7 +7,8 @@ const style = {
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    width: 800,
+    maxWidth: 800,
+    minWidth: "60%",
     bgcolor: 'background.paper',
     border: '2px solid #000',
     boxShadow: 24,
@@ -103,7 +104,7 @@ function AddOrderModal({ openModal, setOpenModal, state, setState }) {
     }
 
     return (
-        <div>
+        <div className='col-12 col-sm-12 col-md-12 col-lg-12'>
             <Modal
                 open={openModal}
                 onClose={handleClose}
@@ -116,7 +117,7 @@ function AddOrderModal({ openModal, setOpenModal, state, setState }) {
                     </ModalHeader>
                     <ModalBody>
                         <Row className='my-3'>
-                            <Col xs='6'>
+                            <Col className='col-12 col-sm-12 col-md-6 col-lg-6'>
                                 <TextField
                                     id="outlined-select-currency"
                                     select
@@ -131,7 +132,7 @@ function AddOrderModal({ openModal, setOpenModal, state, setState }) {
                                 </TextField>
 
                             </Col>
-                            <Col xs='6'>
+                            <Col className='col-12 col-sm-12 col-md-6 col-lg-6'>
                                 <TextField
                                     id="filled-search"
                                     label="Ghi chú"
@@ -143,7 +144,7 @@ function AddOrderModal({ openModal, setOpenModal, state, setState }) {
                             </Col>
                         </Row>
                         <Row className='my-3'>
-                            <Col xs='6'>
+                            <Col className='col-12 col-sm-12 col-md-6 col-lg-6'>
                             <TextField
                                     id="outlined-select-currency"
                                     select
@@ -158,7 +159,7 @@ function AddOrderModal({ openModal, setOpenModal, state, setState }) {
 
                         </TextField>
                             </Col>
-                            <Col xs='6'>
+                            <Col className='col-12 col-sm-12 col-md-6 col-lg-6'>
                                 <TextField
                                     id="filled-search"
                                     type="date"

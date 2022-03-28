@@ -144,7 +144,7 @@ function DetailProduct({ id }) {
                     <h5 className="text-center text-bold">THAM KHẢO SẢN PHẨM KHÁC</h5>
                     {
                         relativeProduct.map((element, index) => (
-                            <div key={index} className="box-product-detail">
+                            <div key={index} className="box-product-detail col-sm-6 col-md-3 col-6 col-lg-3">
                                 <Card onClick={() =>HandleDetailClick(element)}>
                                     <CardImg
                                         alt="Image.jpg"

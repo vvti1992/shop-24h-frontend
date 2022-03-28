@@ -82,10 +82,10 @@ function Content({keySearch}) {
                 <Introduce />
             </Row>
             <Row>
-                <Col xs='3' className="col-filter">
+                <Col sm='12' md='3' lg='3'>
                     <FilterComponent getFilter={setFilterReceive} />
                 </Col>
-                <Col xs='9'className="col-product">
+                <Col sm='12' md='9' lg='9'>
                     {
                         responseObj.length > 0 ?
                         <>
@@ -95,7 +95,8 @@ function Content({keySearch}) {
                         <p className="h4 text-center pt-5">Không tìm thấy danh sách sản phẩm</p>
                     }
                 </Col>
-            </Row>
+            </Row> 
+            <hr />
         </Container>
     )
 }

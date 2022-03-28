@@ -1,7 +1,7 @@
 import { Col } from "reactstrap";
 function Service () {
     return (
-        <Col sm='3'>
+        <Col className="col-6 col-md-3 col-sm-6 col-lg-3">
             <h5 className="footer-title">SERVICES</h5>
             <ul className="footer-content">
                 <li>Help center</li>

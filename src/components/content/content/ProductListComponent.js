@@ -56,11 +56,11 @@ function ProductListComponent({ displayProduct }) {
     return (
         <Container>
             <Row>
-                <Col xs='12'>
-                    <h4 className="text-center py-4">DANH SÁCH SẢN PHẨM</h4> <hr />
+                <Col>
+                    <h4 className="text-center pt-2">DANH SÁCH SẢN PHẨM</h4> <hr />
                     {
                         posts.map((element, index) => (
-                            <div key={index} className="box-product" >
+                            <div key={index} className="box-product col-sm-6 col-md-4 col-6 col-lg-3" >
                                 <Card onClick={() => HandleDetailClick(element)}>
                                     <CardImg
                                         alt="Image.jpg"

@@ -1,18 +1,16 @@
-import 'bootstrap/dist/css/bootstrap.min.css'
-import { useState, useEffect } from 'react';
-import { Row, Col } from 'reactstrap';
-import { useSelector, useDispatch } from "react-redux";
-import { selectUserLogin } from '../../../Redux/userslice'
-import { Menu, MenuItem, Divider, alpha, styled } from '@mui/material';
+import FollowTheSignsIcon from '@mui/icons-material/FollowTheSigns';
 import InfoIcon from '@mui/icons-material/Info';
-import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import LogoutIcon from '@mui/icons-material/Logout';
-import { auth } from '../../../firebase';
-import Login from '../../login/Login';
-import { setUserLogin } from "../../../Redux/userslice";
+import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
+import { alpha, Divider, Menu, MenuItem, styled } from '@mui/material';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { useState } from 'react';
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from 'react-router-dom';
-import avatar from '../../../assets/images/avatar/unnamed.png'
+import { UncontrolledTooltip } from 'reactstrap';
+import { auth } from '../../../firebase';
+import { selectUserLogin, setUserLogin } from '../../../Redux/userslice';
+import Login from '../../login/Login';
 
 const StyledMenu = styled((props) => (
     <Menu
@@ -105,38 +103,26 @@ function IconNavBar() {
     return (
         <div>
             {user.email !== "" ?
-                <Row  >
-                    <Col xs='8'>
-                        <ul className='user-info'
-                            id="demo-customized-button"
-                            aria-controls={open ? 'demo-customized-menu' : undefined}
-                            aria-haspopup="true"
-                            aria-expanded={open ? 'true' : undefined}
-                            variant="contained"
-                            disableElevation
-                            onMouseEnter={handleClick}
-                            endIcon={<KeyboardArrowDownIcon />}
-                        >
-                            <li><a >Tài khoản</a></li>
-                            <li>{user.fullName}</li>
-                        </ul>
-                    </Col>
-                    <Col xs='2' className='pt-4' onPointerMove={showUserInfo}>
-                        {user.photoURL !== "" ? <img className='avatar' src={avatar} /> : <img className='avatar' src={avatar} />}
-                    </Col>
-                </Row>
+                <li onClick={showUserInfo} id='my-profile'>
+                    <i class="fas fa-list fa-xl px-2"></i>
+                    <UncontrolledTooltip
+                        placement="left"
+                        target="my-profile"
+                    >
+                        Thông tin khách hàng
+                    </UncontrolledTooltip>
+                </li>
                 :
-                <Row>
-                    <Col xs='10'>
-                        <ul className='user-info' onClick={login}>
-                            <li><a >Đăng nhập/Đăng ký</a></li>
-                            <li><a>Tài khoản</a></li>
-                        </ul>
-                    </Col>
-                    <Col xs='2' className='pt-4'>
-                        <i className="fa-solid fa-user fa-2xl text-white"></i>
-                    </Col>
-                </Row>
+                <li xs='2' onClick={login}>
+                    <FollowTheSignsIcon id='header-login' />
+                    <UncontrolledTooltip
+                        placement="right"
+                        target="header-login"
+                    >
+                        Đăng nhập
+                    </UncontrolledTooltip>
+                </li>
+
             }
             <StyledMenu
                 id="demo-customized-menu"
@@ -153,7 +139,7 @@ function IconNavBar() {
                     Thông tin tài khoản
                 </MenuItem>
                 <MenuItem onClick={handleMyOrder} disableRipple>
-                    <ShoppingBagIcon/>
+                    <ShoppingBagIcon />
                     Đơn hàng của tôi
                 </MenuItem>
                 <Divider sx={{ my: 0.5 }} />
@@ -161,6 +147,7 @@ function IconNavBar() {
                     <LogoutIcon />
                     Đăng xuất
                 </MenuItem>
+
             </StyledMenu>
             <Login openModal={modalLogin} setOpenModal={setModalLogin} />
         </div>

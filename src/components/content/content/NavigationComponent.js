@@ -9,11 +9,11 @@ function NavigationComponent({count,page, setPage}) {
         setPage(1);
     },[]);
     return (
-        <Row className="py-4">
+        <Row className=" mb-4 pb-2">
             <div className='pagination'>
                 <Pagination count={count} defaultPage={page} color="primary" onChange={onSelectPage} />
             </div>
-            <hr />
+            
         </Row>
     )
 }

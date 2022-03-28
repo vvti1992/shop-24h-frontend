@@ -118,22 +118,16 @@ function HeaderLte({ mode, setSearchCustomer, setSearchProduct, setSearchOrder }
   }
   return (
     <>
-      <div>
+      <div >
         <nav className="main-header navbar navbar-expand navbar-white navbar-light">
-          <ul className="navbar-nav">
+          <ul className="navbar-nav col-3 col-sm-3 col-md-3 col-lg-3">
             <li className="nav-item">
               <a className="nav-link" data-widget="pushmenu" role="button"><i className="fas fa-bars" /></a>
             </li>
-            <li className="nav-item d-none d-sm-inline-block">
-              <a className="nav-link">Home</a>
-            </li>
-            <li className="nav-item d-none d-sm-inline-block">
-              <a className="nav-link">Contact</a>
-            </li>
           </ul>
-          <ul className="navbar-nav ml-auto adminlte-header-search">
+          <ul className="navbar-nav ml-auto adminlte-header-search col-5 col-sm-5 col-md-5 col-lg-5">
             <li className="nav-item ">
-              <FormControl variant="standard">
+            <FormControl variant="standard" className='col-12 col-sm-12 col-md-6 col-lg-6'>
                 {
                   mode == 0 ?
                     <NativeSelect
@@ -176,7 +170,7 @@ function HeaderLte({ mode, setSearchCustomer, setSearchProduct, setSearchOrder }
                 }
 
               </FormControl>
-              <FormControl variant="standard">
+              <FormControl variant="standard" className='col-12 col-sm-12 col-md-6 col-lg-6'>
                 <BootstrapInput id="demo-customized-textbox" onKeyPress={handleSearch} onChange={(e) => setInputValue(e.target.value)} value={inputValue} />
                 <RefreshIcon id="UncontrolledTooltipExample" onClick={handleFreshData} className='mui-icon-refresh'/>
                 <UncontrolledTooltip
@@ -187,7 +181,9 @@ function HeaderLte({ mode, setSearchCustomer, setSearchProduct, setSearchOrder }
                 </UncontrolledTooltip>
               </FormControl>
             </li>
-            <li className="nav-item dropdown">
+          </ul>
+          <ul className="adminlte-bar-logout navbar-nav ml-auto col-4 col-sm-4 col-md-4 col-lg-4">
+          <li className="nav-item dropdown">
               <a className="nav-link" data-toggle="dropdown" >
                 <i className="far fa-comments" />
                 <span className="badge badge-danger navbar-badge">3</span>

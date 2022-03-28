@@ -64,9 +64,9 @@ function OrderDetail() {
                     <Button className='btn btn-primary' onClick={backHomePage}>Quay về trang chủ</Button>
                 </div> :
                 <Row>
-                    <Col xs='8'>
-
-                        <Table className=" order-table table table-inverse table-bordered overflow-scroll table-hover"
+                    <Col className="col-12 col-sm-12 col-md-12 col-lg-8">
+                    <div className="table-responsive">
+                    <Table className=" order-table table table-inverse table-bordered overflow-scroll table-hover"
                         >
                             <thead className='thead-inverse bg-primary text-white'>
                                 <tr>
@@ -117,9 +117,11 @@ function OrderDetail() {
                                 }
                             </tbody>
                         </Table>
+                    </div>
+                        
 
                     </Col>
-                    <Col xs='4'>
+                    <Col className="col-12 col-sm-12 col-md-12 col-lg-4">
                         <div className= 'sum-money'>
                             <p>Tổng tiền tạm tính: <span> {sumMoney().toLocaleString()}</span> VNĐ</p>
                             <button className = 'btn-buy-order' onClick={createNewOrder}>
