@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from 'react-router-dom';
 import { Button, Col, Container, Input, Label, Row, Table } from "reactstrap";
-import { decreaseQuatity, deleteProduct, increaseQuatity, selectProduct, selectUserLogin, setUserLogin, deleteAllProduct } from "../../../Redux/userslice";
+import { decreaseQuatity, increaseQuatity, selectProduct, selectUserLogin, setUserLogin } from "../../../Redux/userslice";
 import AlertModal from "../../alert-dialog/alertModal";
 import WarningDeleteProductModal from "../../alert-dialog/warning-deleteProduct";
 

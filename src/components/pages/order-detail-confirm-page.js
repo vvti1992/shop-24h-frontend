@@ -1,7 +1,7 @@
 import { Breadcrumb, BreadcrumbItem, Container } from 'reactstrap';
-import OrderDetailConfirm from "./content/content/order-detail-confirm";
-import Footer from "./footer/footer";
-import Header from "./header/header";
+import OrderDetailConfirm from "../content/content/order-detail-confirm";
+import Footer from "../footer/footer";
+import Header from "../header/header";
 
 
 function OrderDetailConfirmPage() {

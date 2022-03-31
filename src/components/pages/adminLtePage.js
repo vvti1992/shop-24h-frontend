@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
-import CustomerLte from "./adminLte/customer";
-import FooterLte from "./adminLte/footer";
-import HeaderLte from "./adminLte/header";
-import MenuLte from "./adminLte/menu";
-import OrderLte from "./adminLte/order";
-import ProductLte from "./adminLte/product";
+import CustomerLte from "../adminLte/customer";
+import FooterLte from "../adminLte/footer";
+import HeaderLte from "../adminLte/header";
+import MenuLte from "../adminLte/menu";
+import OrderLte from "../adminLte/order";
+import ProductLte from "../adminLte/product";
 import { Row, Col } from 'reactstrap'
 
 function AdminLtePage() {

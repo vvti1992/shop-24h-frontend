@@ -1,11 +1,10 @@
-import OrderDetail from "./content/content/order-detail";
+import OrderDetail from "../content/content/order-detail";
 import {Container, Breadcrumb , BreadcrumbItem} from 'reactstrap'
-import Footer from "./footer/footer";
-import Header from "./header/header";
-import ViewOrder from "./content/content/view-order";
+import Footer from "../footer/footer";
+import Header from "../header/header";
 
 
-function ViewOrderPage() {
+function OrderDetailPage() {
 
     return (
         <>
@@ -24,9 +23,9 @@ function ViewOrderPage() {
                     </BreadcrumbItem>
                 </Breadcrumb>
             </Container>
-            <ViewOrder />
+            <OrderDetail />
             <Footer />
         </>
     )
 }
-export default ViewOrderPage;
+export default OrderDetailPage;

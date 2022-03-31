@@ -1,9 +1,9 @@
+import { Pagination } from '@mui/material';
 import { useEffect, useState } from 'react';
-import { Table, Row } from 'react-bootstrap';
+import { Row, Table } from 'react-bootstrap';
+import { Col } from 'reactstrap';
 import AddCustomerModal from '../alert-dialog/addCustomerModal';
 import EditCustomerModal from '../alert-dialog/editCustomerModal';
-import { Stack, Pagination } from '@mui/material';
-import { Col } from 'reactstrap';
 
 function CustomerLte({ search, reset, setReset }) {
     const fetchApi = async (paramUrl, paramOption = {}) => {

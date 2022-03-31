@@ -1,6 +1,6 @@
-import Header from './header/header';
-import Content from './content/content';
-import Footer from './footer/footer';
+import Header from '../header/header';
+import Content from '../content/content';
+import Footer from '../footer/footer';
 import { Breadcrumb, BreadcrumbItem, Container } from "reactstrap";
 import { useState } from 'react';
 

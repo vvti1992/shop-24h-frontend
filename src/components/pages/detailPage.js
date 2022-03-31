@@ -1,6 +1,6 @@
-import Header from './header/header';
-import Footer from './footer/footer';
-import DetailProduct from './content/content/DetailProduct';
+import Header from '../header/header';
+import Footer from '../footer/footer';
+import DetailProduct from '../content/content/DetailProduct';
 import { useParams } from 'react-router-dom';
 import {Container, Breadcrumb, BreadcrumbItem } from "reactstrap";
 import { useEffect, useState } from "react";

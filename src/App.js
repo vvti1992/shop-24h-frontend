@@ -1,13 +1,13 @@
 
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
-import DetailPage from './components/detailPage';
-import HomePage from './components/homePage';
+import DetailPage from './components/pages/detailPage';
+import HomePage from './components/pages/homePage';
 import Login from './components/login/Login';
-import OrderDetailConfirmPage from './components/order-detail-confirm-page';
-import OrderDetailPage from './components/order-detail-page';
-import AdminLtePage from './components/adminLtePage';
-import ViewOrderPage from './components/view-order-page';
+import OrderDetailConfirmPage from './components/pages/order-detail-confirm-page';
+import OrderDetailPage from './components/pages/order-detail-page';
+import AdminLtePage from './components/pages/adminLtePage';
+import ViewOrderPage from './components/pages/view-order-page';
 function App() {
   return (
     <div >
